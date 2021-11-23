@@ -20,6 +20,7 @@
 		<postgres.driver.version>42.3.1</postgres.driver.version>
 		<web.version>2.6.0</web.version>
 		<jpa.version>2.6.0</jpa.version>
+		<javafx.version>11</javafx.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,6 +63,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>${javafx.version}</version>
 		</dependency>
 	</dependencies>
 
