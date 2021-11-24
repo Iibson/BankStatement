@@ -17,8 +17,8 @@ public class BankStatementService {
     private BankStatementRepository bankStatementRepository;
 
     private List<BankStatement> bankStatementsFinal = new ArrayList<>(Arrays.asList(
-            new BankStatement(1, new Date(), 1.23, "Millenium"),
-            new BankStatement(2, new Date(), 2.23, "Millenium")
+//            new BankStatement(1, new Date(), 1.23, "Millenium"),
+//            new BankStatement(2, new Date(), 2.23, "Millenium")
     ));
 
     public List<BankStatement> getAllBankStatements() {

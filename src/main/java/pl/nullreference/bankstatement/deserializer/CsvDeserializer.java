@@ -61,6 +61,7 @@ public class CsvDeserializer extends BaseDeserializer implements IDeserializer {
                 e.printStackTrace();
             }
         }
+
         return BankStatement.builder()
                 .items(items)
                 .build();
