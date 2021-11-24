@@ -21,8 +21,9 @@ public class BankstatementApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		bankStatementService.getAllBankStatements()
-				.forEach(System.out::println);
+
+//		bankStatementService.getAllBankStatements()
+//				.forEach(System.out::println);
 //		String sql = "INSERT INTO bankstatement (id, date, endbalance, bankname) VALUES (2, '2021-12-12', 4.20, 'Nest Bank')";
 //		int rows = jdbcTemplate.update(sql);
 //		if (rows > 0) {

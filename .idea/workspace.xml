@@ -23,9 +23,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9db3d6f9-bd15-4ee7-9bd3-aa2e6f2b7993" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_virtuald_curvesapi_1_06.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_opencsv_opencsv_5_5_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_zaxxer_SparseBitSet_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_15.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_11_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_compress_1_21.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_math3_3_6_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_text_1_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_5_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_5_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_lite_5_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_5_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/CsvDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/IDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/base/BaseDeserializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/exceptions/InvalidExtensionException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/factory/DeserializerFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/provider/Provider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/provider/ProviderMappingValue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/provider/ProviderSetting.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/ParserRegistryTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_mac_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_11.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_mac_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_11.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_mac_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_11.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bankstatement.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bankstatement.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/BankstatementApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/BankstatementApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/BankStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/BankStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/BankStatementItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/BankStatementItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/BankStatementService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/BankStatementService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/BankstatementApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/BankstatementApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/model/BankStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/model/BankStatement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/model/BankStatementItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/model/BankStatementItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/model/BankStatementRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/model/BankStatementRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/pl/nullreference/bankstatement/BankstatementApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/pl/nullreference/bankstatement/BankstatementApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +75,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -42,12 +84,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
-      </MavenGeneralSettings>
-    </option>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="21ELTZOHcHdunXjr89K08E0lrsI" />
   <component name="ProjectViewState">
@@ -60,23 +103,29 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/java/new/Debter" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
+  <component name="RunManager" selected="JUnit.ParserRegistryTests.testRegistry">
+    <configuration name="ParserRegistryTests.testRegistry" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bankstatement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.nullreference.bankstatement.deserializer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pl.nullreference.bankstatement.deserializer" />
+      <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.ParserRegistryTests" />
+      <option name="METHOD_NAME" value="testRegistry" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -88,6 +137,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ParserRegistryTests.testRegistry" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -100,6 +154,10 @@
       <workItem from="1637501311230" duration="9901000" />
       <workItem from="1637521022808" duration="22000" />
       <workItem from="1637694966265" duration="2019000" />
+      <workItem from="1637704036049" duration="410000" />
+      <workItem from="1637704800708" duration="2861000" />
+      <workItem from="1637762289008" duration="5330000" />
+      <workItem from="1637779263982" duration="751000" />
     </task>
     <servers />
   </component>
@@ -117,55 +175,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="678" y="312" key="#SQL_Dialects" timestamp="1637516840883">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="678" y="312" key="#SQL_Dialects/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637516840883" />
-    <state x="1173" y="189" key="#com.intellij.ide.util.MemberChooser" timestamp="1637503095514">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="1173" y="189" key="#com.intellij.ide.util.MemberChooser/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637503095514" />
-    <state width="942" height="285" key="GridCell.Tab.0.bottom" timestamp="1637521044315">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="942" height="285" key="GridCell.Tab.0.bottom/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637521044315" />
-    <state width="942" height="285" key="GridCell.Tab.0.center" timestamp="1637521044314">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="942" height="285" key="GridCell.Tab.0.center/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637521044314" />
-    <state width="942" height="285" key="GridCell.Tab.0.left" timestamp="1637521044314">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="942" height="285" key="GridCell.Tab.0.left/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637521044314" />
-    <state width="942" height="285" key="GridCell.Tab.0.right" timestamp="1637521044315">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="942" height="285" key="GridCell.Tab.0.right/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637521044315" />
-    <state width="942" height="285" key="GridCell.Tab.1.bottom" timestamp="1637521044316">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="942" height="285" key="GridCell.Tab.1.bottom/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637521044316" />
-    <state width="942" height="285" key="GridCell.Tab.1.center" timestamp="1637521044315">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="942" height="285" key="GridCell.Tab.1.center/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637521044315" />
-    <state width="942" height="285" key="GridCell.Tab.1.left" timestamp="1637521044315">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="942" height="285" key="GridCell.Tab.1.left/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637521044315" />
-    <state width="942" height="285" key="GridCell.Tab.1.right" timestamp="1637521044316">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="942" height="285" key="GridCell.Tab.1.right/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637521044316" />
-    <state x="519" y="97" key="SettingsEditor" timestamp="1637695917067">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state x="519" y="97" key="SettingsEditor/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637695917067" />
-    <state width="600" height="428" key="javadoc.popup" timestamp="1637502299234">
-      <screen x="0" y="25" width="1920" height="1055" />
-    </state>
-    <state width="600" height="428" key="javadoc.popup/1920.25.1440.875/0.25.1920.1055@0.25.1920.1055" timestamp="1637502299234" />
   </component>
 </project>
