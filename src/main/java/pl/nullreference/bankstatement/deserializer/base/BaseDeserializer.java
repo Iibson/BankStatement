@@ -10,7 +10,7 @@ public abstract class BaseDeserializer implements IDeserializer {
 
     protected File file;
     protected Map<String, String> settings;
-    protected Map<Integer, String> mappings;
+    protected Map<String, Integer> mappings;
 
     public BaseDeserializer(Provider provider, File file) {
         this.file = file;

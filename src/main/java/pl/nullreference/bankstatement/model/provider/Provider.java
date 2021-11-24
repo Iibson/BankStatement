@@ -33,9 +33,9 @@ public class Provider {
                 .collect(Collectors.toMap(ProviderSetting::getName, ProviderSetting::getValue));
     }
 
-    public Map<Integer, String> getMappingValuesAsMap() {
+    public Map<String, Integer> getMappingValuesAsMap() {
         return this.mappingValues
                 .stream()
-                .collect(Collectors.toMap(ProviderMappingValue::getMapFrom, ProviderMappingValue::getMapTo));
+                .collect(Collectors.toMap(ProviderMappingValue::getMapTo, ProviderMappingValue::getMapFrom));
     }
 }

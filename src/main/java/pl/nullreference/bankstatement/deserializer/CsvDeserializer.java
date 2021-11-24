@@ -12,12 +12,16 @@ import com.opencsv.CSVReaderBuilder;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CsvDeserializer extends BaseDeserializer implements IDeserializer {
 
-    private CSVReader csvReader;
+    private final CSVReader csvReader;
 
     public CsvDeserializer(Provider provider, File file) throws Exception {
         super(provider, file);
@@ -25,7 +29,7 @@ public class CsvDeserializer extends BaseDeserializer implements IDeserializer {
         String separator = this.settings.get("separator");
         String skipLines = this.settings.get("skipLines");
 
-        if(separator == null || skipLines == null) throw new Exception();
+        if (separator == null || skipLines == null) throw new Exception();
 
         CSVParser parser = new CSVParserBuilder()
                 .withSeparator(separator.charAt(0))
@@ -41,12 +45,11 @@ public class CsvDeserializer extends BaseDeserializer implements IDeserializer {
 
     @Override
     public BankStatement deserialize() {
-        List<BankStatementItem> items = new ArrayList<>();
+        Set<BankStatementItem> items = new HashSet<>();
 
         try {
-            List<String[]> parsedString = csvReader.readAll();
-            for (String[] line : parsedString) {
-//                models.add(new ProofOfConceptModel(provider.generateMetaData(line)));
+            for (String[] line: csvReader.readAll()) {
+                items.add(new BankStatementItem(line, this.mappings));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,6 +61,8 @@ public class CsvDeserializer extends BaseDeserializer implements IDeserializer {
                 e.printStackTrace();
             }
         }
-        return BankStatement.builder().build();
+        return BankStatement.builder()
+                .items(items)
+                .build();
     }
 }
