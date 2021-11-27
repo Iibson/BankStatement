@@ -14,6 +14,7 @@ import java.util.List;
 @Entity(name = "bankstatement")
 public class BankStatement {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Date date;
     private Double beginningbalance;
