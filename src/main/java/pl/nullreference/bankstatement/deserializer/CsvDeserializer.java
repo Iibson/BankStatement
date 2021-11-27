@@ -1,5 +1,6 @@
 package pl.nullreference.bankstatement.deserializer;
 
+import lombok.SneakyThrows;
 import pl.nullreference.bankstatement.deserializer.base.BaseDeserializer;
 import pl.nullreference.bankstatement.model.BankStatement;
 import pl.nullreference.bankstatement.model.BankStatementItem;
@@ -43,24 +44,20 @@ public class CsvDeserializer extends BaseDeserializer implements IDeserializer {
                 .build();
     }
 
+    @SneakyThrows
     @Override
     public BankStatement deserialize() {
         Set<BankStatementItem> items = new HashSet<>();
 
-        try {
-            for (String[] line: csvReader.readAll()) {
-                items.add(new BankStatementItem(line, this.mappings));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
+        List<String[]> parsedData = csvReader.readAll();
+        for (String[] line : parsedData) {
             try {
-                this.csvReader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                items.add(createBankStatementItemFromMetaData(line));
+            } catch (Exception ignored) {
             }
         }
+
+        this.csvReader.close();
         return BankStatement.builder()
                 .items(items)
                 .build();

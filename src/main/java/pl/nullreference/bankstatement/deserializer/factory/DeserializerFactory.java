@@ -11,7 +11,7 @@ import java.io.File;
 @Service
 public class DeserializerFactory {
     public IDeserializer getDeserializer(Provider provider, File file) throws Exception {
-        switch (provider.getName().toUpperCase()) {
+        switch (provider.getExtension().toUpperCase()) {
             case "XLSX":
                 return new XlsxDeserializer(provider, file);
             case "CSV":
