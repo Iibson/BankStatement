@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-@AllArgsConstructor
+@Data
 @Builder
 @AllArgsConstructor
 @Entity(name = "bankStatementItem")
