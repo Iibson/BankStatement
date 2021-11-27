@@ -1,5 +1,6 @@
 package pl.nullreference.bankstatement;
 
+import javafx.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +22,7 @@ public class BankstatementApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
+		Application.launch(BankStatementApplicationUI.class, args);
 //		bankStatementService.getAllBankStatements()
 //				.forEach(System.out::println);
 //		String sql = "INSERT INTO bankstatement (id, date, endbalance, bankname) VALUES (2, '2021-12-12', 4.20, 'Nest Bank')";
