@@ -1,5 +1,6 @@
 package pl.nullreference.bankstatement;
 
+import javafx.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,35 +29,6 @@ public class BankstatementApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<BankStatementItem> bankStatementsItemFixed = new ArrayList<>(Arrays.asList(
-				BankStatementItem.builder()
-						.operationDate(new Date())
-						.operationDescription("operacja1")
-						.cardAccountNumber("1234123412341234")
-						.sum(123.23)
-						.currency("PLN")
-						.balance(420.21)
-						.build(),
-				BankStatementItem.builder()
-						.operationDate(new Date())
-						.operationDescription("operacja2")
-						.cardAccountNumber("432143214321")
-						.sum(112.23)
-						.currency("PLN")
-						.balance(110.21)
-						.build()
-		));
-		System.out.println("Items: " + bankStatementsItemFixed);
-
-		BankStatement bankStatementFixed = BankStatement.builder()
-				.date(new Date())
-				.beginningbalance(21.12)
-				.endbalance(24.24)
-				.bankname("AliorBank")
-				.items(bankStatementsItemFixed)
-				.build();
-
-		System.out.println("BankStatement:" + bankStatementFixed);
-		bankStatementService.addBankStatement(bankStatementFixed);
+		Application.launch(BankStatementApplicationUI.class,args);
 	}
 }

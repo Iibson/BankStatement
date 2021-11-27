@@ -12,8 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-import pl.nullreference.bankstatement.model.BankStatement;
-import pl.nullreference.bankstatement.model.BankStatementItem;
+
+import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
 
 
