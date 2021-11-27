@@ -1,16 +1,12 @@
-package pl.nullreference.bankstatement.model;
+package pl.nullreference.bankstatement.model.bankstatement;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -18,15 +14,18 @@ import java.util.Set;
 @Entity(name = "bankstatement")
 public class BankStatement {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private Date date;
-//    private Double beginningbalance;
+    private Double beginningbalance;
     private Double endbalance;
     private String bankname;
 
     public BankStatement() {
 
     }
-    @OneToMany
-    private Set<BankStatementItem> items;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="bank_statement_id", referencedColumnName = "id")
+    private List<BankStatementItem> items;
 }

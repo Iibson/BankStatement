@@ -1,8 +1,8 @@
 package pl.nullreference.bankstatement.deserializer;
 
 import pl.nullreference.bankstatement.deserializer.base.BaseDeserializer;
-import pl.nullreference.bankstatement.model.BankStatement;
-import pl.nullreference.bankstatement.model.BankStatementItem;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.model.provider.Provider;
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
@@ -12,12 +12,7 @@ import com.opencsv.CSVReaderBuilder;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CsvDeserializer extends BaseDeserializer implements IDeserializer {
 
@@ -45,7 +40,7 @@ public class CsvDeserializer extends BaseDeserializer implements IDeserializer {
 
     @Override
     public BankStatement deserialize() {
-        Set<BankStatementItem> items = new HashSet<>();
+        List<BankStatementItem> items = new ArrayList<>();
 
         try {
             for (String[] line: csvReader.readAll()) {
