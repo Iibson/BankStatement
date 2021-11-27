@@ -3,11 +3,9 @@ package pl.nullreference.bankstatement.model.provider;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -18,10 +16,12 @@ public class Provider {
     private int id;
     private String name;
     private String extension;
-    @OneToMany
-    private Set<ProviderSetting> settings;
-    @OneToMany
-    private Set<ProviderMappingValue> mappingValues;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="provider_id", referencedColumnName = "id")
+    private List<ProviderSetting> settings;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="provider_id", referencedColumnName = "id")
+    private List<ProviderMappingValue> mappingValues;
 
     public Provider() {
 

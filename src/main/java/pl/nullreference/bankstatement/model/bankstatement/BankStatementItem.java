@@ -1,4 +1,4 @@
-package pl.nullreference.bankstatement.model;
+package pl.nullreference.bankstatement.model.bankstatement;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @Data
 @Builder
 @AllArgsConstructor
-@Entity(name = "bankStatementItem")
+@Entity(name = "bankstatementitem")
 public class BankStatementItem {
     @Id
     private int id;
