@@ -1,7 +1,8 @@
 package pl.nullreference.bankstatement.model.provider;
 
 import org.springframework.data.repository.CrudRepository;
-import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 
-public interface ProviderRepository extends CrudRepository<BankStatement, Integer > {
+public interface ProviderRepository extends CrudRepository<Provider, Integer> {
+
+    Provider findByNameAndExtension(String name, String extension);
 }

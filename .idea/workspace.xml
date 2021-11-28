@@ -23,13 +23,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9db3d6f9-bd15-4ee7-9bd3-aa2e6f2b7993" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wyciag_ing.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/wyciąg_milenium.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/CsvDeserializerTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/DeserializerFactoryTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/BankStatementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/BankStatementService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/CsvDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/CsvDeserializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/base/BaseDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/base/BaseDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/bankstatement/BankStatementItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/bankstatement/BankStatementItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/CsvDeserializerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/CsvDeserializerTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/DeserializerFactoryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/DeserializerFactoryTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/exceptions/InvalidExtensionException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/factory/DeserializerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/factory/DeserializerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/BankStatementItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/BankStatementItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/ParserRegistryTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/BankStatementService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/BankStatementService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/configuration/ServiceLocatorConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/model/BankStatement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/model/BankStatement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/model/BankStatementItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/model/BankStatementItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/parser/IParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/nullreference/bankstatement/parser/parserRegistry/ParserRegistry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/pl/nullreference/bankstatement/parser/ParserRegistryTests.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,19 +97,21 @@
       <recent name="D:\gownoxd\from pulpit\studia\semestr 5\TO\project\sr-1750-nullreference\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.XlsxDeserializerTests">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.XlsxDeserializerTests.testIngXlsxDeserializer">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CsvDeserializerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CsvDeserializerTests.testMillenniumCsvDeserializer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bankstatement" />
       <extension name="coverage">
         <pattern>
@@ -104,7 +121,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="pl.nullreference.bankstatement.deserializer" />
       <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.CsvDeserializerTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="testMillenniumCsvDeserializer" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -124,7 +142,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="XlsxDeserializerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DeserializerFactoryTests.testDeserializerFactory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bankstatement" />
       <extension name="coverage">
         <pattern>
@@ -133,8 +151,9 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="pl.nullreference.bankstatement.deserializer" />
-      <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.XlsxDeserializerTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.DeserializerFactoryTests" />
+      <option name="METHOD_NAME" value="testDeserializerFactory" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -180,11 +199,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.XlsxDeserializerTests" />
-        <item itemvalue="JUnit.CsvDeserializerTests" />
-        <item itemvalue="JUnit.DeserializerFactoryTests" />
         <item itemvalue="JUnit.XlsxDeserializerTests.testIngXlsxDeserializer" />
         <item itemvalue="JUnit.XlsxDeserializerTests.testMillenniumXlsxDeserializer" />
+        <item itemvalue="JUnit.DeserializerFactoryTests" />
+        <item itemvalue="JUnit.DeserializerFactoryTests.testDeserializerFactory" />
+        <item itemvalue="JUnit.CsvDeserializerTests.testMillenniumCsvDeserializer" />
       </list>
     </recent_temporary>
   </component>
@@ -205,7 +224,6 @@
       <workItem from="1637779263982" duration="3964000" />
       <workItem from="1637952672836" duration="3626000" />
       <workItem from="1638008182084" duration="5185000" />
-      <workItem from="1638092220029" duration="293000" />
     </task>
     <servers />
   </component>
@@ -244,7 +262,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java</url>
-          <line>59</line>
+          <line>58</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
