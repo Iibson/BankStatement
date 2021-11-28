@@ -3,8 +3,8 @@ package pl.nullreference.bankstatement.deserializer;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import pl.nullreference.bankstatement.deserializer.base.BaseDeserializer;
-import pl.nullreference.bankstatement.model.BankStatement;
-import pl.nullreference.bankstatement.model.BankStatementItem;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.model.provider.Provider;
 
@@ -27,7 +27,7 @@ public class XlsxDeserializer extends BaseDeserializer implements IDeserializer 
     public BankStatement deserialize() {
         Workbook workbook = null;
         FileInputStream stream = null;
-        Set<BankStatementItem> items = new HashSet<>();
+        List<BankStatementItem> items = new ArrayList<>();
 
         try {
             stream = new FileInputStream(this.file);

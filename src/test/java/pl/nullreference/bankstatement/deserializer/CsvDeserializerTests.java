@@ -2,7 +2,8 @@ package pl.nullreference.bankstatement.deserializer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
-import pl.nullreference.bankstatement.model.BankStatementItem;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.model.provider.ProviderMappingValue;
 import pl.nullreference.bankstatement.model.provider.ProviderSetting;
@@ -21,12 +22,12 @@ public class CsvDeserializerTests {
     @Test
     public void testIngCsvDeserializer() throws Exception {
         File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("wyciag_ing.csv")).toURI());
-        Set<ProviderSetting> settings =  Set.of(
+        List<ProviderSetting> settings =  List.of(
                 new ProviderSetting(1, "separator", ";"),
                 new ProviderSetting(2, "skipLines", "20"),
                 new ProviderSetting(3, "dateFormat", "dd.mm.yyyy")
         );
-        Set<ProviderMappingValue> mappingValues = Set.of(
+        List<ProviderMappingValue> mappingValues = List.of(
                 new ProviderMappingValue(1, 0, "date"),
                 new ProviderMappingValue(1, 4, "cardAccountNumber"),
                 new ProviderMappingValue(1, 8, "sum"),
@@ -38,7 +39,7 @@ public class CsvDeserializerTests {
 
         CsvDeserializer csvDeserializer = new CsvDeserializer(provider, file);
 
-        Set<BankStatementItem> items = csvDeserializer.deserialize().getItems();
+        List<BankStatementItem> items = csvDeserializer.deserialize().getItems();
 
         Assert.isTrue(items.size() == 91);
     }
@@ -46,12 +47,12 @@ public class CsvDeserializerTests {
     @Test
     public void testMillenniumCsvDeserializer() throws Exception {
         File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("wyciąg_milenium.csv")).toURI());
-        Set<ProviderSetting> settings =  Set.of(
+        List<ProviderSetting> settings =  List.of(
                 new ProviderSetting(1, "separator", ","),
                 new ProviderSetting(2, "skipLines", "1"),
                 new ProviderSetting(3, "dateFormat", "yyyy-mm-dd")
         );
-        Set<ProviderMappingValue> mappingValues = Set.of(
+        List<ProviderMappingValue> mappingValues = List.of(
                 new ProviderMappingValue(1, 1, "date"),
                 new ProviderMappingValue(1, 0, "cardAccountNumber"),
                 new ProviderMappingValue(1, 7, "sum"),
@@ -63,7 +64,7 @@ public class CsvDeserializerTests {
 
         CsvDeserializer csvDeserializer = new CsvDeserializer(provider, file);
 
-        Set<BankStatementItem> items = csvDeserializer.deserialize().getItems();
+        List<BankStatementItem> items = csvDeserializer.deserialize().getItems();
 
         Assert.isTrue(items.size() == 38);
     }
