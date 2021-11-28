@@ -1,12 +1,13 @@
 package pl.nullreference.bankstatement;
 
 import lombok.SneakyThrows;
+import org.jetbrains.annotations.TestOnly;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatementRepository;
 import pl.nullreference.bankstatement.deserializer.IDeserializer;
 import pl.nullreference.bankstatement.deserializer.factory.DeserializerFactory;
-import pl.nullreference.bankstatement.model.BankStatement;
-import pl.nullreference.bankstatement.model.BankStatementRepository;
 import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.model.provider.ProviderRepository;
 
@@ -40,6 +41,11 @@ public class BankStatementService {
         Provider provider = providerRepository.findByNameAndExtension(bankName, extension);
         IDeserializer deserializer = deserializerFactory.getDeserializer(provider, file);
         BankStatement bankStatement = deserializer.deserialize();
+        bankStatementRepository.save(bankStatement);
+    }
+
+    @TestOnly
+    public void addBankStatement(BankStatement bankStatement) {
         bankStatementRepository.save(bankStatement);
     }
 }

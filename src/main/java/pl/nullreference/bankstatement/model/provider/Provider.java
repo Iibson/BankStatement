@@ -1,27 +1,30 @@
 package pl.nullreference.bankstatement.model.provider;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
+@Builder
 @Getter
 @Entity(name = "provider")
 public class Provider {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String extension;
-    @OneToMany
-    private Set<ProviderSetting> settings;
-    @OneToMany
-    private Set<ProviderMappingValue> mappingValues;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="provider_id", referencedColumnName = "id")
+    private List<ProviderSetting> settings;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="provider_id", referencedColumnName = "id")
+    private List<ProviderMappingValue> mappingValues;
 
     public Provider() {
 

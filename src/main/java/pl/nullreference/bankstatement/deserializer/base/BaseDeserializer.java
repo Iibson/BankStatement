@@ -1,7 +1,7 @@
 package pl.nullreference.bankstatement.deserializer.base;
 
 import pl.nullreference.bankstatement.deserializer.IDeserializer;
-import pl.nullreference.bankstatement.model.BankStatementItem;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.model.provider.Provider;
 
 import java.io.File;

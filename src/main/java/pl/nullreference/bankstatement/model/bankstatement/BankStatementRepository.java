@@ -1,4 +1,4 @@
-package pl.nullreference.bankstatement.model;
+package pl.nullreference.bankstatement.model.bankstatement;
 
 import org.springframework.data.repository.CrudRepository;
 
