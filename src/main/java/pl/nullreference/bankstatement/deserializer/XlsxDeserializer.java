@@ -1,52 +1,77 @@
 package pl.nullreference.bankstatement.deserializer;
 
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import pl.nullreference.bankstatement.deserializer.base.BaseDeserializer;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.model.provider.Provider;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.*;
 
-public class XlsxDeserializer implements IDeserializer {
+public class XlsxDeserializer extends BaseDeserializer implements IDeserializer {
 
-    private Provider provider;
+    private int linesToSkip;
 
     public XlsxDeserializer(Provider provider, File file) {
-        this.provider = provider;
+        super(provider, file);
+
+        this.linesToSkip = Integer.parseInt(this.settings.get("skipLines"));
     }
+
     @Override
     public BankStatement deserialize() {
-        return null;
+        Workbook workbook = null;
+        FileInputStream stream = null;
+        List<BankStatementItem> items = new ArrayList<>();
+
+        try {
+            stream = new FileInputStream(this.file);
+            workbook = new XSSFWorkbook(stream);
+            Sheet sheet = workbook.getSheetAt(0);
+            for (int i = this.linesToSkip; i < sheet.getLastRowNum() + 1; i++) {
+                List<String> line = new ArrayList<>();
+                Row row = sheet.getRow(i);
+                for (int j = 0; j < row.getLastCellNum(); j++) {
+                    Cell cell = row.getCell(j);
+                    if (cell == null) {
+                        line.add("");
+                        continue;
+                    }
+                    switch (cell.getCellType()) {
+                        case STRING:
+                            line.add(cell.getStringCellValue());
+                            break;
+                        case NUMERIC:
+                            line.add(String.valueOf(cell.getNumericCellValue()));
+                            break;
+                        default:
+                            line.add("");
+                            break;
+                    }
+                }
+                try {
+                    items.add(createBankStatementItemFromMetaData(line.toArray(String[]::new)));
+                } catch (Exception ignored) {
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                assert workbook != null;
+                workbook.close();
+                stream.close();
+            } catch (IOException ignored) {
+            }
+        }
+
+        return BankStatement.builder()
+                .items(items)
+                .build();
     }
 }
-//    private final Provider provider;
-//
-//    public XLSXSerializer(Provider provider) {
-//        this.provider = provider;
-//    }
-//
-//    public List<ProofOfConceptModel> serialize(String fileName) {
-//        try {
-//            FileInputStream file = new FileInputStream(new File(fileName));
-//            Workbook workbook = new XSSFWorkbook(file);
-//            DataFormatter dataFormatter = new DataFormatter();
-//            Iterator<Sheet> sheetIterator = workbook.sheetIterator();
-//            while(sheetIterator.hasNext()) {
-//                Sheet sheet = sheetIterator.next();
-//                System.out.println("Name: " + sheet.getSheetName());
-////                sheet.
-//                Iterator<Row> rowIterator = sheet.rowIterator();
-//                while(rowIterator.hasNext()) {
-//                    Row row = rowIterator.next();
-//                    Iterator<Cell> cellIterator = row.cellIterator();
-//                    while (cellIterator.hasNext()) {
-//                        Cell cell = cellIterator.next();
-//                        String cellValue = dataFormatter.formatCellValue(cell);
-//                        System.out.println(cellValue);
-//                    }
-//                }
-//            }
-//            workbook.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
