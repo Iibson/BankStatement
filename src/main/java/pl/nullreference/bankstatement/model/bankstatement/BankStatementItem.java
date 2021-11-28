@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-@Data
 @Builder
 @AllArgsConstructor
 @Entity(name = "bankstatementitem")
@@ -31,14 +30,5 @@ public class BankStatementItem {
 
     public BankStatementItem() {
 
-    }
-
-    public BankStatementItem(String[] data, Map<String, Integer> mapping) throws ParseException {
-        this.id = ThreadLocalRandom.current().nextInt(0, Integer.MAX_VALUE);
-        this.operationDate = new SimpleDateFormat("dd-MMM-yy").parse(data[mapping.get("date")]);
-        this.cardAccountNumber = data[mapping.get("cardAccountNumber")];
-        this.sum = Double.parseDouble(data[mapping.get("sum")]);
-        this.currency = data[mapping.get("currency")];
-        this.balance = Double.parseDouble(data[mapping.get("balance")]);
     }
 }

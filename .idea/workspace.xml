@@ -24,10 +24,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9db3d6f9-bd15-4ee7-9bd3-aa2e6f2b7993" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/CsvDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/CsvDeserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/base/BaseDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/base/BaseDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/BankStatementItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/BankStatementItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/provider/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/provider/Provider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/bankstatement/BankStatementItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/bankstatement/BankStatementItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/CsvDeserializerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/CsvDeserializerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/DeserializerFactoryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/DeserializerFactoryTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,21 +77,24 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
   </component>
-  <component name="RunManager" selected="JUnit.ParserRegistryTests.testRegistry">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\gownoxd\from pulpit\studia\semestr 5\TO\project\sr-1750-nullreference\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.XlsxDeserializerTests">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ParserRegistryTests.testRegistry" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CsvDeserializerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bankstatement" />
       <extension name="coverage">
         <pattern>
@@ -98,8 +103,69 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="pl.nullreference.bankstatement.deserializer" />
-      <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.ParserRegistryTests" />
-      <option name="METHOD_NAME" value="testRegistry" />
+      <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.CsvDeserializerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DeserializerFactoryTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bankstatement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.nullreference.bankstatement.deserializer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pl.nullreference.bankstatement.deserializer" />
+      <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.DeserializerFactoryTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="XlsxDeserializerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bankstatement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.nullreference.bankstatement.deserializer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pl.nullreference.bankstatement.deserializer" />
+      <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.XlsxDeserializerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="XlsxDeserializerTests.testIngXlsxDeserializer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bankstatement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.nullreference.bankstatement.deserializer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pl.nullreference.bankstatement.deserializer" />
+      <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.XlsxDeserializerTests" />
+      <option name="METHOD_NAME" value="testIngXlsxDeserializer" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="XlsxDeserializerTests.testMillenniumXlsxDeserializer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bankstatement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.nullreference.bankstatement.deserializer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pl.nullreference.bankstatement.deserializer" />
+      <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.XlsxDeserializerTests" />
+      <option name="METHOD_NAME" value="testMillenniumXlsxDeserializer" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -114,7 +180,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ParserRegistryTests.testRegistry" />
+        <item itemvalue="JUnit.XlsxDeserializerTests" />
+        <item itemvalue="JUnit.CsvDeserializerTests" />
+        <item itemvalue="JUnit.DeserializerFactoryTests" />
+        <item itemvalue="JUnit.XlsxDeserializerTests.testIngXlsxDeserializer" />
+        <item itemvalue="JUnit.XlsxDeserializerTests.testMillenniumXlsxDeserializer" />
       </list>
     </recent_temporary>
   </component>
@@ -132,7 +202,10 @@
       <workItem from="1637704036049" duration="410000" />
       <workItem from="1637704800708" duration="2861000" />
       <workItem from="1637762289008" duration="5330000" />
-      <workItem from="1637779263982" duration="3080000" />
+      <workItem from="1637779263982" duration="3964000" />
+      <workItem from="1637952672836" duration="3626000" />
+      <workItem from="1638008182084" duration="5185000" />
+      <workItem from="1638092220029" duration="293000" />
     </task>
     <servers />
   </component>
@@ -150,5 +223,31 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/CsvDeserializer.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/CsvDeserializer.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/factory/DeserializerFactory.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
