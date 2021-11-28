@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import pl.nullreference.bankstatement.deserializer.base.BaseDeserializer;
 import pl.nullreference.bankstatement.model.BankStatement;
 import pl.nullreference.bankstatement.model.BankStatementItem;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.model.provider.Provider;
 
 import java.io.File;
