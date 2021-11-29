@@ -52,21 +52,6 @@ public class BankStatementService {
     }
 
     public void addProviders(){
-        List<ProviderSetting> settings =  List.of(
-                ProviderSetting.builder().name("separator").value(";").build(),
-                ProviderSetting.builder().name("skipLines").value("20").build(),
-                ProviderSetting.builder().name("dateFormat").value("dd.mm.yyyy").build()
-        );
-        List<ProviderMappingValue> mappingValues = List.of(
-                ProviderMappingValue.builder().mapTo("date").mapFrom(0).build(),
-                ProviderMappingValue.builder().mapTo("cardAccountNumber").mapFrom(4).build(),
-                ProviderMappingValue.builder().mapTo("sum").mapFrom(8).build(),
-                ProviderMappingValue.builder().mapTo("currency").mapFrom(9).build(),
-                ProviderMappingValue.builder().mapTo("balance").mapFrom(15).build(),
-                ProviderMappingValue.builder().mapTo("operationDescription").mapFrom(6).build()
-        );
-        Provider provider = Provider.builder().name("ING").extension("csv").settings(settings).mappingValues(mappingValues).build();
-        providerRepository.save(provider);
     }
     public List<String> getAllProviders() {
         List<String> list = new ArrayList<>();
