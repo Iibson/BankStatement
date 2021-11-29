@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Getter
 @Builder
-@Entity(name = "providerMappingValue")
+@Entity(name = "providermappingvalue")
 public class ProviderMappingValue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

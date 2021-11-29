@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Builder
 @Getter
-@Entity(name = "providerSetting")
+@Entity(name = "providersetting")
 public class ProviderSetting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -53,7 +53,6 @@ public class BankStatementOverviewController {
 
     @FXML
     private void initialize() {
-        bankStatementService.addProviders();
         ObservableList<String> providers = FXCollections.observableList(bankStatementService.getAllProviders());
         comboBox.setItems(providers);
         setData(bankStatementService.getAllBankStatements());

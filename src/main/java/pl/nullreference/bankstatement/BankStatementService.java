@@ -51,8 +51,6 @@ public class BankStatementService {
         bankStatementRepository.save(bankStatement);
     }
 
-    public void addProviders(){
-    }
     public List<String> getAllProviders() {
         List<String> list = new ArrayList<>();
         list.add("ING");
