@@ -39,7 +39,7 @@ public class BankStatementService {
     @SneakyThrows
     public void parseAndSave(File file, String bankName) {
         String filename = file.getName();
-        String extension = filename.substring(filename.lastIndexOf("."));
+        String extension = filename.substring(filename.lastIndexOf(".") + 1);
         Provider provider = providerRepository.findByNameAndExtension(bankName, extension);
         IDeserializer deserializer = deserializerFactory.getDeserializer(provider, file);
         BankStatement bankStatement = deserializer.deserialize();
