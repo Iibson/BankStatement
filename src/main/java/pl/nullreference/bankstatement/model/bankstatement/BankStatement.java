@@ -25,7 +25,7 @@ public class BankStatement {
 
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name="bank_statement_id", referencedColumnName = "id")
     private List<BankStatementItem> items;
 }

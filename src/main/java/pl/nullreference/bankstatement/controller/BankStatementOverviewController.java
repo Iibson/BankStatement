@@ -1,27 +1,27 @@
 package pl.nullreference.bankstatement.controller;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
-
-import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
+import javafx.stage.Stage;
+import org.springframework.stereotype.Component;
+import pl.nullreference.bankstatement.BankStatementService;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
 
+import java.io.File;
+import java.util.List;
 
+@Component
 public class BankStatementOverviewController {
 
+    private BankStatementService bankStatementService;
+    private Stage primaryStage;
     private ObservableList<BankStatementItemViewModel> data;
-    private ObservableList<String> providers;
-    private BankStatementController appController;
+
     @FXML
     private ComboBox<String> comboBox = new ComboBox<>();
 
@@ -47,10 +47,17 @@ public class BankStatementOverviewController {
     @FXML
     private Button deleteButton;
 
+    public BankStatementOverviewController(BankStatementService bankStatementService) {
+        this.bankStatementService = bankStatementService;
+    }
+
     @FXML
     private void initialize() {
+        bankStatementService.addProviders();
+        ObservableList<String> providers = FXCollections.observableList(bankStatementService.getAllProviders());
+        comboBox.setItems(providers);
+        setData(bankStatementService.getAllBankStatements());
         statementsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
         operationDescriptionColumn.setCellValueFactory(dataValue -> dataValue.getValue().operationDescriptionProperty());
         cardAccountNumberColumn.setCellValueFactory(dataValue -> dataValue.getValue().cardAccountNumberProperty());
         currencyColumn.setCellValueFactory(dataValue -> dataValue.getValue().currencyProperty());
@@ -62,19 +69,19 @@ public class BankStatementOverviewController {
 
     @FXML
     private void handleImport(ActionEvent event) {
-        this.appController.showFileChooser();
-        System.out.println(this.comboBox.getValue());
-           }
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        File file = fileChooser.showOpenDialog(this.primaryStage);
+        String bankName = comboBox.getValue();
+        bankStatementService.parseAndSave(file, bankName);
+    }
 
-    public void setData(List<BankStatementItem> statementsList) {
+    public void setData(List<BankStatement> statementsList) {
         this.data = FXCollections.observableArrayList();
-        statementsList.forEach(statement -> data.add(new BankStatementItemViewModel(statement)));
+        statementsList.forEach(statement -> statement.getItems().forEach(item -> data.add(new BankStatementItemViewModel(item))));
         statementsTable.setItems(data);
     }
-    public void setProviders(List<String> providers){
-        this.comboBox.setItems(FXCollections.observableList(providers));
-    }
-    public void setAppController(BankStatementController appController) {
-        this.appController = appController;
+    public void setPrimaryStage(Stage primaryStage){
+        this.primaryStage = primaryStage;
     }
 }

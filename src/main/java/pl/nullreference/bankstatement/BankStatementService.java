@@ -9,7 +9,9 @@ import pl.nullreference.bankstatement.model.bankstatement.BankStatementRepositor
 import pl.nullreference.bankstatement.deserializer.IDeserializer;
 import pl.nullreference.bankstatement.deserializer.factory.DeserializerFactory;
 import pl.nullreference.bankstatement.model.provider.Provider;
+import pl.nullreference.bankstatement.model.provider.ProviderMappingValue;
 import pl.nullreference.bankstatement.model.provider.ProviderRepository;
+import pl.nullreference.bankstatement.model.provider.ProviderSetting;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,28 +51,23 @@ public class BankStatementService {
         bankStatementRepository.save(bankStatement);
     }
 
-    public List<BankStatementItem> getAllBankStatementItems() {
-        BankStatementItem item1 = new BankStatementItem();
-        BankStatementItem item2 = new BankStatementItem();
-        List<BankStatementItem> list = new ArrayList<>();
-        item1.setCardAccountNumber("123456789");
-        item1.setOperationDescription("description 1");
-        item1.setSum(123.456);
-        item1.setOperationDate(new Date());
-        item1.setBalance(432.1);
-        item1.setCurrency("PLN");
-        list.add(item1);
-        item2.setCardAccountNumber("123456789");
-        item2.setOperationDescription("description 1");
-        item2.setSum(123.456);
-        item2.setOperationDate(new Date());
-        item2.setBalance(432.1);
-        item2.setCurrency("PLN");
-        list.add(item2);
-        return list;
-
+    public void addProviders(){
+        List<ProviderSetting> settings =  List.of(
+                ProviderSetting.builder().name("separator").value(";").build(),
+                ProviderSetting.builder().name("skipLines").value("20").build(),
+                ProviderSetting.builder().name("dateFormat").value("dd.mm.yyyy").build()
+        );
+        List<ProviderMappingValue> mappingValues = List.of(
+                ProviderMappingValue.builder().mapTo("date").mapFrom(0).build(),
+                ProviderMappingValue.builder().mapTo("cardAccountNumber").mapFrom(4).build(),
+                ProviderMappingValue.builder().mapTo("sum").mapFrom(8).build(),
+                ProviderMappingValue.builder().mapTo("currency").mapFrom(9).build(),
+                ProviderMappingValue.builder().mapTo("balance").mapFrom(15).build(),
+                ProviderMappingValue.builder().mapTo("operationDescription").mapFrom(6).build()
+        );
+        Provider provider = Provider.builder().name("ING").extension("csv").settings(settings).mappingValues(mappingValues).build();
+        providerRepository.save(provider);
     }
-
     public List<String> getAllProviders() {
         List<String> list = new ArrayList<>();
         list.add("ING");
