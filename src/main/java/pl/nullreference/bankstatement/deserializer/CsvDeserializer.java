@@ -1,19 +1,19 @@
 package pl.nullreference.bankstatement.deserializer;
 
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import lombok.SneakyThrows;
 import pl.nullreference.bankstatement.deserializer.base.BaseDeserializer;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.model.provider.Provider;
-import com.opencsv.CSVParser;
-import com.opencsv.CSVParserBuilder;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CsvDeserializer extends BaseDeserializer implements IDeserializer {
 

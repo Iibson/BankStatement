@@ -1,23 +1,20 @@
-package pl.nullreference.bankstatement;
+package pl.nullreference.bankstatement.services;
 
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.TestOnly;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
-import pl.nullreference.bankstatement.model.bankstatement.BankStatementRepository;
 import pl.nullreference.bankstatement.deserializer.IDeserializer;
 import pl.nullreference.bankstatement.deserializer.factory.DeserializerFactory;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
+import pl.nullreference.bankstatement.services.repositories.BankStatementRepository;
 import pl.nullreference.bankstatement.model.provider.Provider;
-import pl.nullreference.bankstatement.model.provider.ProviderMappingValue;
-import pl.nullreference.bankstatement.model.provider.ProviderRepository;
-import pl.nullreference.bankstatement.model.provider.ProviderSetting;
+import pl.nullreference.bankstatement.services.repositories.ProviderRepository;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class BankStatementService {

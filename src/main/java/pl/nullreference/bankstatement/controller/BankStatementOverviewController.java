@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
-import pl.nullreference.bankstatement.BankStatementService;
+import pl.nullreference.bankstatement.services.BankStatementService;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
 
@@ -62,12 +62,10 @@ public class BankStatementOverviewController {
     @FXML
     private void handleImport(ActionEvent event) {
         try {
-            // Load the fxml file and create a new stage for the dialog
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(BankStatementOverviewController.class.getResource("/view/ImportBankStatementDialog.fxml"));
             BorderPane page = loader.load();
 
-            // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Import new statement");
             dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -80,8 +78,10 @@ public class BankStatementOverviewController {
             controller.setDialogStage(dialogStage);
 
             dialogStage.showAndWait();
-            if (controller.getConfirmedBankName() != null && controller.getConfirmedFile() != null)
+            if (controller.getConfirmedBankName() != null && controller.getConfirmedFile() != null) {
                 bankStatementService.parseAndSave(controller.getConfirmedFile(), controller.getConfirmedBankName());
+                setData(bankStatementService.getAllBankStatements());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

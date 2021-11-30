@@ -13,8 +13,9 @@ import org.springframework.context.support.GenericApplicationContext;
 public class BankStatementApplicationUI extends Application {
 
     private ConfigurableApplicationContext context;
+
     @Override
-    public void init() throws Exception {
+    public void init() {
         ApplicationContextInitializer<GenericApplicationContext> initializer = genericApplicationContext -> {
             genericApplicationContext.registerBean(Application.class, () -> BankStatementApplicationUI.this);
             genericApplicationContext.registerBean(Parameters.class, this::getParameters);
@@ -26,12 +27,12 @@ public class BankStatementApplicationUI extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         this.context.publishEvent(new StageReadyEvent(primaryStage));
     }
 
     @Override
-    public void stop() throws Exception {
+    public void stop() {
         this.context.close();
         Platform.exit();
     }
@@ -39,7 +40,7 @@ public class BankStatementApplicationUI extends Application {
     class StageReadyEvent extends ApplicationEvent {
 
         public Stage getStage() {
-            return Stage.class.cast(getSource());
+            return (Stage) getSource();
         }
 
         public StageReadyEvent(Object source) {

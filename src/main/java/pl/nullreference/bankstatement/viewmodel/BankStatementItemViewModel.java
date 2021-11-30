@@ -3,7 +3,6 @@ package pl.nullreference.bankstatement.viewmodel;
 import javafx.beans.property.*;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class BankStatementItemViewModel {
