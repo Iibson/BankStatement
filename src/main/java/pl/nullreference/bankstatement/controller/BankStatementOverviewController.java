@@ -4,15 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 import pl.nullreference.bankstatement.BankStatementService;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Component
@@ -21,9 +24,6 @@ public class BankStatementOverviewController {
     private BankStatementService bankStatementService;
     private Stage primaryStage;
     private ObservableList<BankStatementItemViewModel> data;
-
-    @FXML
-    private ComboBox<String> comboBox = new ComboBox<>();
 
     @FXML
     private TableView<BankStatementItemViewModel> statementsTable;
@@ -44,17 +44,12 @@ public class BankStatementOverviewController {
     private TableColumn<BankStatementItemViewModel, Double> balanceColumn;
 
 
-    @FXML
-    private Button deleteButton;
-
     public BankStatementOverviewController(BankStatementService bankStatementService) {
         this.bankStatementService = bankStatementService;
     }
 
     @FXML
     private void initialize() {
-        ObservableList<String> providers = FXCollections.observableList(bankStatementService.getAllProviders());
-        comboBox.setItems(providers);
         setData(bankStatementService.getAllBankStatements());
         statementsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         operationDescriptionColumn.setCellValueFactory(dataValue -> dataValue.getValue().operationDescriptionProperty());
@@ -62,25 +57,39 @@ public class BankStatementOverviewController {
         currencyColumn.setCellValueFactory(dataValue -> dataValue.getValue().currencyProperty());
         sumColumn.setCellValueFactory(dataValue -> dataValue.getValue().sumProperty().asObject());
         balanceColumn.setCellValueFactory(dataValue -> dataValue.getValue().balanceProperty().asObject());
-
-        deleteButton.disableProperty().bind(comboBox.getSelectionModel().selectedItemProperty().isNull());
     }
 
     @FXML
     private void handleImport(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
-        File file = fileChooser.showOpenDialog(this.primaryStage);
-        String bankName = comboBox.getValue();
-        bankStatementService.parseAndSave(file, bankName);
+        try {
+            // Load the fxml file and create a new stage for the dialog
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(BankStatementOverviewController.class.getResource("/view/ImportBankStatementDialog.fxml"));
+            BorderPane page = loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Import new statement");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            BankStatementImportDialogController controller = loader.getController();
+            controller.setProvidersBox(this.bankStatementService.getAllProviders());
+            controller.setDialogStage(dialogStage);
+
+            dialogStage.showAndWait();
+            if (controller.getConfirmedBankName() != null && controller.getConfirmedFile() != null)
+                bankStatementService.parseAndSave(controller.getConfirmedFile(), controller.getConfirmedBankName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setData(List<BankStatement> statementsList) {
         this.data = FXCollections.observableArrayList();
         statementsList.forEach(statement -> statement.getItems().forEach(item -> data.add(new BankStatementItemViewModel(item))));
         statementsTable.setItems(data);
-    }
-    public void setPrimaryStage(Stage primaryStage){
-        this.primaryStage = primaryStage;
     }
 }

@@ -56,8 +56,9 @@ public class BankStatementService {
 
     public List<String> getAllProviders() {
         List<String> list = new ArrayList<>();
-        list.add("ING");
-        list.add("Millennium");
+        providerRepository.findAll().forEach(el -> {
+            if (!list.contains(el.getName())) list.add(el.getName());
+        });
         return list;
     }
 }
