@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pl.nullreference.bankstatement.controller.BankStatementOverviewController">
+    <center>
+        <TableView fx:id="statementsTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="operationDescriptionColumn" prefWidth="75.0" text="Operation description"/>
+                <TableColumn fx:id="cardAccountNumberColumn" prefWidth="75.0" text="Card account number"/>
+                <TableColumn fx:id="sumColumn" prefWidth="75.0" text="Sum"/>
+                <TableColumn fx:id="currencyColumn" prefWidth="75.0" text="Currency"/>
+                <TableColumn fx:id="balanceColumn" prefWidth="75.0" text="Balance"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+        </TableView>
+
+    </center>
+    <top>
+        <BorderPane prefHeight="50.0" prefWidth="800.0" BorderPane.alignment="BOTTOM_RIGHT">
+            <padding>
+                <Insets top="15" right="25" bottom="15" left="25"/>
+            </padding>
+            <right>
+                <Button prefWidth="150" mnemonicParsing="false"
+                        onAction="#handleImport" text="Import" BorderPane.alignment="BOTTOM_RIGHT">
+                </Button>
+            </right>
+        </BorderPane>
+    </top>
+</BorderPane>

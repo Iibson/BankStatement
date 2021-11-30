@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<BorderPane prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pl.nullreference.bankstatement.controller.BankStatementImportDialogController">
+    <center>
+        <GridPane hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="15" right="25" bottom="25" left="25"/>
+            </padding>
+            <Text text="Import File"
+                  GridPane.columnIndex="0" GridPane.rowIndex="0"
+                  GridPane.columnSpan="2"
+            />
+
+            <Label text="Imported file:"
+                   GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="100"
+                   GridPane.columnSpan="2"/>
+
+            <TextField fx:id="fileName"
+                       GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.columnSpan="4" disable="true"/>
+            <Button GridPane.columnIndex="7" GridPane.rowIndex="1" prefWidth="150" GridPane.columnSpan="2"
+                    onAction="#handleImport">
+                Import File
+            </Button>
+            <padding>
+                <Insets top="15" right="25" bottom="25" left="25"/>
+            </padding>
+            <Label text="Your bank:"
+                   GridPane.columnIndex="0" GridPane.rowIndex="2" prefWidth="100"
+                   GridPane.columnSpan="2"/>
+            <ComboBox fx:id="providersBox" GridPane.columnIndex="2" GridPane.rowIndex="2" prefWidth="150"
+                      GridPane.columnSpan="4">
+            </ComboBox>
+            <Button onAction="#handleConfirm" prefWidth="150" GridPane.columnIndex="7" GridPane.rowIndex="8">
+                Process import
+            </Button>
+
+        </GridPane>
+    </center>
+</BorderPane>
