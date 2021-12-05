@@ -1,7 +1,7 @@
 package pl.nullreference.bankstatement.deserializer;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.model.provider.ProviderMappingValue;
@@ -10,13 +10,13 @@ import pl.nullreference.bankstatement.model.provider.ProviderSetting;
 import java.io.File;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class XlsxDeserializerTests {
     @Test
-    public void testIngXlsxDeserializer() throws Exception {
+    public void IngXlsxDeserializer() throws Exception {
+        //given
         File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("wyciag_ing.xlsx")).toURI());
-        List<ProviderSetting> settings =  List.of(
+        List<ProviderSetting> settings = List.of(
                 new ProviderSetting(2, "skipLines", "20"),
                 new ProviderSetting(3, "dateFormat", "dd.mm.yyyy")
         );
@@ -31,13 +31,14 @@ public class XlsxDeserializerTests {
         Provider provider = new Provider(1, "name", "xlsx", settings, mappingValues);
 
         XlsxDeserializer xlsxDeserializer = new XlsxDeserializer(provider, file);
-
+        //when
         List<BankStatementItem> items = xlsxDeserializer.deserialize().getItems();
-
-        Assert.isTrue(items.size() == 91);
+        //then
+        Assertions.assertEquals(items.size(), 91);
     }
     @Test
-    public void testMillenniumXlsxDeserializer() throws Exception {
+    public void MillenniumXlsxDeserializer() throws Exception {
+        //given
         File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("wyciąg_milenium.xlsx")).toURI());
         List<ProviderSetting> settings =  List.of(
                 new ProviderSetting(2, "skipLines", "1"),
@@ -54,9 +55,9 @@ public class XlsxDeserializerTests {
         Provider provider = new Provider(1, "name", "xlsx", settings, mappingValues);
 
         XlsxDeserializer xlsxDeserializer = new XlsxDeserializer(provider, file);
-
+        //when
         List<BankStatementItem> items = xlsxDeserializer.deserialize().getItems();
-
-        Assert.isTrue(items.size() == 38);
+        //then
+        Assertions.assertEquals(items.size(), 38);
     }
 }

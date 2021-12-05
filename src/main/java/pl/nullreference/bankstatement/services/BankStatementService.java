@@ -5,7 +5,7 @@ import org.jetbrains.annotations.TestOnly;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.nullreference.bankstatement.deserializer.IDeserializer;
+import pl.nullreference.bankstatement.deserializer.Deserializer;
 import pl.nullreference.bankstatement.deserializer.factory.DeserializerFactory;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.services.repositories.BankStatementRepository;
@@ -35,15 +35,18 @@ public class BankStatementService {
         return bankStatements;
     }
 
-    @SneakyThrows
     @Transactional
     public void parseAndSave(File file, String bankName) {
         String filename = file.getName();
         String extension = filename.substring(filename.lastIndexOf(".") + 1);
         Provider provider = providerRepository.findByNameAndExtension(bankName, extension);
-        IDeserializer deserializer = deserializerFactory.getDeserializer(provider, file);
-        BankStatement bankStatement = deserializer.deserialize();
-        bankStatementRepository.save(bankStatement);
+        try{
+            Deserializer deserializer = deserializerFactory.getDeserializer(provider, file);
+            BankStatement bankStatement = deserializer.deserialize();
+            bankStatementRepository.save(bankStatement);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @TestOnly
