@@ -35,17 +35,18 @@ public class BankStatementService {
     }
 
     @Transactional
-    public void parseAndSave(File file, String bankName) {
+    public BankStatement parseAndSave(File file, String bankName) {
         String filename = file.getName();
         String extension = filename.substring(filename.lastIndexOf(".") + 1);
         Provider provider = providerRepository.findByNameAndExtension(bankName, extension);
         try{
             Deserializer deserializer = deserializerFactory.getDeserializer(provider, file);
             BankStatement bankStatement = deserializer.deserialize();
-            bankStatementRepository.save(bankStatement);
+            return bankStatementRepository.save(bankStatement);
         } catch (Exception e){
             e.printStackTrace();
         }
+        return null;
     }
 
     @TestOnly
