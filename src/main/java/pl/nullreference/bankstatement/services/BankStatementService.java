@@ -1,5 +1,6 @@
 package pl.nullreference.bankstatement.services;
 
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.TestOnly;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BankStatementService {
 
-    @Autowired
-    private BankStatementRepository bankStatementRepository;
+    private final BankStatementRepository bankStatementRepository;
 
-    @Autowired
-    private ProviderRepository providerRepository;
+    private final ProviderRepository providerRepository;
 
-    @Autowired
-    private DeserializerFactory deserializerFactory;
+    private final DeserializerFactory deserializerFactory;
 
     public List<BankStatement> getAllBankStatements() {
         List<BankStatement> bankStatements = new ArrayList<>();
