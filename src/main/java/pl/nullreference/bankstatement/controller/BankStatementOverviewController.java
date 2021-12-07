@@ -58,27 +58,34 @@ public class BankStatementOverviewController {
         sumColumn.setCellValueFactory(dataValue -> dataValue.getValue().sumProperty().asObject());
         balanceColumn.setCellValueFactory(dataValue -> dataValue.getValue().balanceProperty().asObject());
     }
-
+    private FXMLLoader getLoader(){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(BankStatementOverviewController.class.getResource("/view/ImportBankStatementDialog.fxml"));
+        return loader;
+    }
+    private Stage createStage(BorderPane page){
+        // Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Import new statement");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+        return dialogStage;
+    }
+    private void initDataInImportController(BankStatementImportDialogController controller, Stage stage){
+        controller.setProvidersBox(this.bankStatementService.getAllProviders());
+        controller.setDialogStage(stage);
+    }
     @FXML
     private void handleImport(ActionEvent event) {
         try {
             // Load the fxml file and create a new stage for the dialog
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(BankStatementOverviewController.class.getResource("/view/ImportBankStatementDialog.fxml"));
+            FXMLLoader loader = getLoader();
             BorderPane page = loader.load();
-
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Import new statement");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
+            Stage dialogStage = createStage(page);
             BankStatementImportDialogController controller = loader.getController();
-            controller.setProvidersBox(this.bankStatementService.getAllProviders());
-            controller.setDialogStage(dialogStage);
-
+            initDataInImportController(controller, dialogStage);
             dialogStage.showAndWait();
             if (controller.getConfirmedBankName() != null && controller.getConfirmedFile() != null)
                 bankStatementService.parseAndSave(controller.getConfirmedFile(), controller.getConfirmedBankName());
