@@ -16,6 +16,7 @@ import pl.nullreference.bankstatement.services.repositories.ProviderRepository;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
@@ -55,10 +56,9 @@ public class BankStatementService {
     }
 
     public List<String> getAllProviders() {
-        List<String> list = new ArrayList<>();
-        providerRepository.findAll().forEach(el -> {
-            if (!list.contains(el.getName())) list.add(el.getName());
-        });
-        return list;
+        return StreamSupport.stream(providerRepository.findAll().spliterator(), false)
+                .map(Provider::getName)
+                .distinct()
+                .toList();
     }
 }
