@@ -20,10 +20,10 @@ public class Provider {
     private String name;
     private String extension;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="provider_id", referencedColumnName = "id")
+    @JoinColumn(name = "provider_id", referencedColumnName = "id")
     private List<ProviderSetting> settings;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="provider_id", referencedColumnName = "id")
+    @JoinColumn(name = "provider_id", referencedColumnName = "id")
     private List<ProviderMappingValue> mappingValues;
 
     public Provider() {

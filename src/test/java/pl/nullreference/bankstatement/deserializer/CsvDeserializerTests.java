@@ -1,26 +1,21 @@
 package pl.nullreference.bankstatement.deserializer;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
-import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.model.provider.ProviderMappingValue;
 import pl.nullreference.bankstatement.model.provider.ProviderSetting;
 
-import javax.persistence.OneToMany;
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class CsvDeserializerTests {
 
     @Test
-    public void testIngCsvDeserializer() throws Exception {
+    public void IngCsvDeserializer() throws Exception {
+        //given
         File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("wyciag_ing.csv")).toURI());
         List<ProviderSetting> settings =  List.of(
                 new ProviderSetting(1, "separator", ";"),
@@ -38,14 +33,15 @@ public class CsvDeserializerTests {
         Provider provider = new Provider(1, "name", "csv", settings, mappingValues);
 
         CsvDeserializer csvDeserializer = new CsvDeserializer(provider, file);
-
+        //when
         List<BankStatementItem> items = csvDeserializer.deserialize().getItems();
-
-        Assert.isTrue(items.size() == 91);
+        //then
+        Assertions.assertEquals(items.size(), 91);
     }
 
     @Test
-    public void testMillenniumCsvDeserializer() throws Exception {
+    public void MillenniumCsvDeserializer() throws Exception {
+        //given
         File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("wyciąg_milenium.csv")).toURI());
         List<ProviderSetting> settings =  List.of(
                 new ProviderSetting(1, "separator", ","),
@@ -63,9 +59,9 @@ public class CsvDeserializerTests {
         Provider provider = new Provider(1, "name", "csv", settings, mappingValues);
 
         CsvDeserializer csvDeserializer = new CsvDeserializer(provider, file);
-
+        //when
         List<BankStatementItem> items = csvDeserializer.deserialize().getItems();
-
-        Assert.isTrue(items.size() == 38);
+        //then
+        Assertions.assertEquals(items.size(), 38);
     }
 }

@@ -14,7 +14,7 @@
 	<name>bankstatement</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>16</java.version>
 		<lombok.version>1.18.22</lombok.version>
 		<jdbc.version>2.6.0</jdbc.version>
 		<postgres.driver.version>42.3.1</postgres.driver.version>
@@ -33,6 +33,12 @@
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
 		</dependency>
 
 		<dependency>
