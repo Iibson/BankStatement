@@ -1,9 +1,6 @@
 package pl.nullreference.bankstatement.services;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import org.jetbrains.annotations.TestOnly;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nullreference.bankstatement.deserializer.Deserializer;
@@ -48,11 +45,6 @@ public class BankStatementService {
             e.printStackTrace();
         }
         return null;
-    }
-
-    @TestOnly
-    public void addBankStatement(BankStatement bankStatement) {
-        bankStatementRepository.save(bankStatement);
     }
 
     public List<String> getAllProviders() {

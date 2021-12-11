@@ -42,7 +42,7 @@ public class CsvDeserializer extends BaseDeserializer implements Deserializer {
         List<BankStatementItem> items = new ArrayList<>();
 
         try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(this.file))
-                .withCSVParser(this.parser)
+                 .withCSVParser(this.parser)
                 .withSkipLines(this.linesToSkip)
                 .build()) {
 
