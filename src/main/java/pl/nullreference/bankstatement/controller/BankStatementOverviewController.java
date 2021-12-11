@@ -13,6 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.services.BankStatementService;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemListViewModel;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
@@ -23,10 +24,11 @@ import java.util.List;
 @Component
 public class BankStatementOverviewController {
 
-    private BankStatementService bankStatementService;
+    private final BankStatementService bankStatementService;
+
     private Stage primaryStage;
 
-    private BankStatementItemListViewModel statementItemList;
+    private final BankStatementItemListViewModel statementItemList;
     @FXML
     private TableView<BankStatementItemViewModel> statementsTable;
 
@@ -63,16 +65,16 @@ public class BankStatementOverviewController {
         balanceColumn.setCellValueFactory(dataValue -> dataValue.getValue().balanceProperty().asObject());
     }
 
-    private FXMLLoader getLoader() {
+    private FXMLLoader getLoader(String fxmlPath) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(BankStatementOverviewController.class.getResource("/view/ImportBankStatementDialog.fxml"));
+        loader.setLocation(BankStatementOverviewController.class.getResource(fxmlPath));
         return loader;
     }
 
-    private Stage createStage(BorderPane page) {
+    private Stage createStage(BorderPane page, String title) {
         // Create the dialog Stage.
         Stage dialogStage = new Stage();
-        dialogStage.setTitle("Import new statement");
+        dialogStage.setTitle(title);
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(primaryStage);
         Scene scene = new Scene(page);
@@ -85,13 +87,17 @@ public class BankStatementOverviewController {
         controller.setDialogStage(stage);
     }
 
+    private void initDataInImportController(BankStatementItemEditController controller, Stage stage) {
+        controller.setDialogStage(stage);
+    }
+
     @FXML
     private void handleImport(ActionEvent event) {
         try {
             // Load the fxml file and create a new stage for the dialog
-            FXMLLoader loader = getLoader();
+            FXMLLoader loader = getLoader("/view/ImportBankStatementDialog.fxml");
             BorderPane page = loader.load();
-            Stage dialogStage = createStage(page);
+            Stage dialogStage = createStage(page, "Import new statement");
             BankStatementImportDialogController controller = loader.getController();
             initDataInImportController(controller, dialogStage);
             dialogStage.showAndWait();
@@ -101,6 +107,30 @@ public class BankStatementOverviewController {
                     Platform.runLater(() -> this.addNewBankStatement(importedStatement));
                 }).start();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleEdit(ActionEvent event) {
+        try {
+            // Load the fxml file and create a new stage for the dialog
+            FXMLLoader loader = getLoader("/view/EditBankStatementItem.fxml");
+            BorderPane page = loader.load();
+            Stage dialogStage = createStage(page, "Edit Bank Statement Item");
+            BankStatementItemEditController controller = loader.getController();
+            initDataInImportController(controller, dialogStage);
+
+            BankStatementItemViewModel bankStatementItemViewModel = statementsTable.getSelectionModel()
+                    .getSelectedItem();
+            if (bankStatementItemViewModel != null) {
+                controller.setData(bankStatementItemViewModel);
+            }
+            controller.setBankStatementService(bankStatementService);
+
+            dialogStage.showAndWait();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
