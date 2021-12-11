@@ -5,18 +5,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
-import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.services.BankStatementService;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemListViewModel;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
+import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
 import java.util.List;
@@ -115,6 +113,13 @@ public class BankStatementOverviewController {
     @FXML
     private void handleEdit(ActionEvent event) {
         try {
+
+            BankStatementItemViewModel bankStatementItemViewModel = statementsTable.getSelectionModel()
+                    .getSelectedItem();
+            if (bankStatementItemViewModel == null) {
+                showNoBankStatementItemSelectedAlert();
+                return;
+            }
             // Load the fxml file and create a new stage for the dialog
             FXMLLoader loader = getLoader("/view/EditBankStatementItem.fxml");
             BorderPane page = loader.load();
@@ -122,11 +127,7 @@ public class BankStatementOverviewController {
             BankStatementItemEditController controller = loader.getController();
             initDataInImportController(controller, dialogStage);
 
-            BankStatementItemViewModel bankStatementItemViewModel = statementsTable.getSelectionModel()
-                    .getSelectedItem();
-            if (bankStatementItemViewModel != null) {
-                controller.setData(bankStatementItemViewModel);
-            }
+            controller.setData(bankStatementItemViewModel);
             controller.setBankStatementService(bankStatementService);
 
             dialogStage.showAndWait();
@@ -136,6 +137,11 @@ public class BankStatementOverviewController {
         }
     }
 
+    private void showNoBankStatementItemSelectedAlert()
+    {
+        Alert alert = new Alert(AlertType.NONE, "Proszę wybrać element do edycji.", ButtonType.OK);
+        alert.show();
+    }
     public void initData() {
         List<BankStatement> allStatements = this.bankStatementService.getAllBankStatements();
         allStatements.forEach(statement -> statement.getItems()
