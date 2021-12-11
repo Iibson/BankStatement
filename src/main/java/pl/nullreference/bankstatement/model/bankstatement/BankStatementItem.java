@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Builder
@@ -24,6 +21,10 @@ public class BankStatementItem {
     private Double sum;
     private String currency;
     private Double balance;
+    @Column(columnDefinition = "integer default '0'")
+    @Enumerated(EnumType.ORDINAL)
+    @Builder.Default
+    public Category category = Category.NONE;
 
     public BankStatementItem() {
 
