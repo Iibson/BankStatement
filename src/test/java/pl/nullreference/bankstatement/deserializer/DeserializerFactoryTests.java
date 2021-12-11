@@ -1,7 +1,7 @@
 package pl.nullreference.bankstatement.deserializer;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
 import pl.nullreference.bankstatement.deserializer.factory.DeserializerFactory;
 import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.model.provider.ProviderSetting;
@@ -11,10 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static org.mockito.Mockito.mock;
+
 public class DeserializerFactoryTests {
     @Test
-    public void testDeserializerFactory() throws Exception {
-
+    public void DeserializerFactory() throws Exception {
+        //given
         DeserializerFactory deserializerFactory = new DeserializerFactory();
         List<ProviderSetting> settings =  List.of(
                 new ProviderSetting(1, "separator", ","),
@@ -23,10 +25,14 @@ public class DeserializerFactoryTests {
         );
         Provider csvProvider = new Provider(1, "name", "csv", settings, new ArrayList<>());
         Provider xlsxProvider = new Provider(1, "name", "xlsx", settings, new ArrayList<>());
+        File file = mock(File.class);
 
-        File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("wyciąg_milenium.csv")).toURI());
+        //when
+        Deserializer csvDeserializer = deserializerFactory.getDeserializer(csvProvider, file);
+        Deserializer xlsxDeserializer = deserializerFactory.getDeserializer(xlsxProvider, file);
 
-        Assert.isTrue(CsvDeserializer.class == deserializerFactory.getDeserializer(csvProvider, file).getClass());
-        Assert.isTrue(XlsxDeserializer.class == deserializerFactory.getDeserializer(xlsxProvider, file).getClass());
+        //then
+        Assertions.assertEquals(CsvDeserializer.class, csvDeserializer.getClass());
+        Assertions.assertEquals(XlsxDeserializer.class, xlsxDeserializer.getClass());
     }
 }
