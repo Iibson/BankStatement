@@ -7,12 +7,13 @@ import pl.nullreference.bankstatement.deserializer.Deserializer;
 import pl.nullreference.bankstatement.deserializer.factory.DeserializerFactory;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
-import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.services.repositories.BankStatementItemRepository;
 import pl.nullreference.bankstatement.services.repositories.BankStatementRepository;
+import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.services.repositories.ProviderRepository;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
 
+import javax.swing.text.html.Option;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +44,11 @@ public class BankStatementService {
         String filename = file.getName();
         String extension = filename.substring(filename.lastIndexOf(".") + 1);
         Provider provider = providerRepository.findByNameAndExtension(bankName, extension);
-        try {
+        try{
             Deserializer deserializer = deserializerFactory.getDeserializer(provider, file);
             BankStatement bankStatement = deserializer.deserialize();
             return bankStatementRepository.save(bankStatement);
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
         return null;
@@ -61,7 +62,6 @@ public class BankStatementService {
             itemDB.setSum(item.getSum());
             itemDB.setCurrency(item.getCurrency());
             itemDB.setBalance(item.getBalance());
-            itemDB.setCategory(item.getCategory());
             bankStatementItemRepository.save(itemDB);
         });
     }

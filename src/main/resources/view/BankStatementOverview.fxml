@@ -3,32 +3,38 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.nullreference.bankstatement.controller.BankStatementOverviewController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pl.nullreference.bankstatement.controller.BankStatementOverviewController">
     <center>
         <TableView fx:id="statementsTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Category"/>
-                <TableColumn fx:id="operationDescriptionColumn" prefWidth="75.0" text="Operation description" />
-                <TableColumn fx:id="cardAccountNumberColumn" prefWidth="75.0" text="Card account number" />
-                <TableColumn fx:id="sumColumn" prefWidth="75.0" text="Sum" />
-                <TableColumn fx:id="currencyColumn" prefWidth="75.0" text="Currency" />
-                <TableColumn fx:id="balanceColumn" prefWidth="75.0" text="Balance" />
+                <TableColumn fx:id="operationDescriptionColumn" prefWidth="75.0" text="Operation description"/>
+                <TableColumn fx:id="cardAccountNumberColumn" prefWidth="75.0" text="Card account number"/>
+                <TableColumn fx:id="sumColumn" prefWidth="75.0" text="Sum"/>
+                <TableColumn fx:id="currencyColumn" prefWidth="75.0" text="Currency"/>
+                <TableColumn fx:id="balanceColumn" prefWidth="75.0" text="Balance"/>
             </columns>
             <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
         </TableView>
 
     </center>
     <top>
-        <BorderPane prefHeight="50.0" prefWidth="800.0" BorderPane.alignment="BOTTOM_RIGHT">
+        <BorderPane prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="BOTTOM_LEFT">
             <padding>
-                <Insets bottom="15" left="25" right="25" top="15" />
+                <Insets top="15" right="25" bottom="15" left="25"/>
             </padding>
-         <right>
-                <Button mnemonicParsing="false" onAction="#handleImport" prefWidth="150" text="Import" BorderPane.alignment="CENTER">
+            <left>
+                <Button prefWidth="100" mnemonicParsing="false"
+                        onAction="#handleEdit" text="Edit" BorderPane.alignment="BOTTOM_LEFT">
                 </Button>
-         </right>
+            </left>
+            <right>
+                <Button prefWidth="150" mnemonicParsing="false"
+                        onAction="#handleImport" text="Import" BorderPane.alignment="BOTTOM_RIGHT">
+                </Button>
+            </right>
         </BorderPane>
     </top>
 </BorderPane>
