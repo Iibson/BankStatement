@@ -6,13 +6,17 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nullreference.bankstatement.deserializer.Deserializer;
 import pl.nullreference.bankstatement.deserializer.factory.DeserializerFactory;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
-import pl.nullreference.bankstatement.services.repositories.BankStatementRepository;
+import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.model.provider.Provider;
+import pl.nullreference.bankstatement.services.repositories.BankStatementItemRepository;
+import pl.nullreference.bankstatement.services.repositories.BankStatementRepository;
 import pl.nullreference.bankstatement.services.repositories.ProviderRepository;
+import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -20,6 +24,8 @@ import java.util.stream.StreamSupport;
 public class BankStatementService {
 
     private final BankStatementRepository bankStatementRepository;
+
+    private final BankStatementItemRepository bankStatementItemRepository;
 
     private final ProviderRepository providerRepository;
 
@@ -37,14 +43,27 @@ public class BankStatementService {
         String filename = file.getName();
         String extension = filename.substring(filename.lastIndexOf(".") + 1);
         Provider provider = providerRepository.findByNameAndExtension(bankName, extension);
-        try{
+        try {
             Deserializer deserializer = deserializerFactory.getDeserializer(provider, file);
             BankStatement bankStatement = deserializer.deserialize();
             return bankStatementRepository.save(bankStatement);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void updateBankStatementItem(BankStatementItemViewModel item) {
+        Optional<BankStatementItem> bankStatementItem = bankStatementItemRepository.findById(item.getId());
+        bankStatementItem.ifPresent(itemDB -> {
+            itemDB.setOperationDescription(item.getOperationDescription());
+            itemDB.setCardAccountNumber(item.getCardAccountNumber());
+            itemDB.setSum(item.getSum());
+            itemDB.setCurrency(item.getCurrency());
+            itemDB.setBalance(item.getBalance());
+            itemDB.setCategory(item.getCategory());
+            bankStatementItemRepository.save(itemDB);
+        });
     }
 
     public List<String> getAllProviders() {

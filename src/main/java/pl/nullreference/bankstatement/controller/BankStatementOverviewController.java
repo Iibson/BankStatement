@@ -1,10 +1,14 @@
 package pl.nullreference.bankstatement.controller;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -13,6 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
+import pl.nullreference.bankstatement.model.bankstatement.Category;
 import pl.nullreference.bankstatement.services.BankStatementService;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemListViewModel;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
@@ -45,6 +50,8 @@ public class BankStatementOverviewController {
     @FXML
     private TableColumn<BankStatementItemViewModel, Double> balanceColumn;
 
+    @FXML
+    private TableColumn<BankStatementItemViewModel, ComboBox<Category>> categoryColumn;
 
     public BankStatementOverviewController(BankStatementService bankStatementService) {
         this.bankStatementService = bankStatementService;
@@ -54,13 +61,33 @@ public class BankStatementOverviewController {
     @FXML
     private void initialize() {
         this.initData();
+        this.initializeDataTable();
+    }
+
+    private void initializeDataTable() {
         statementsTable.itemsProperty().bindBidirectional(statementItemList.getListProperty());
         statementsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        categoryColumn.setCellValueFactory(this::createComboBoxProperty);
         operationDescriptionColumn.setCellValueFactory(dataValue -> dataValue.getValue().operationDescriptionProperty());
         cardAccountNumberColumn.setCellValueFactory(dataValue -> dataValue.getValue().cardAccountNumberProperty());
         currencyColumn.setCellValueFactory(dataValue -> dataValue.getValue().currencyProperty());
         sumColumn.setCellValueFactory(dataValue -> dataValue.getValue().sumProperty().asObject());
         balanceColumn.setCellValueFactory(dataValue -> dataValue.getValue().balanceProperty().asObject());
+    }
+
+    private ObservableValue<ComboBox<Category>> createComboBoxProperty(TableColumn.CellDataFeatures<BankStatementItemViewModel, ComboBox<Category>> dataValue) {
+        ComboBox<Category> box = new ComboBox<>();
+        box.setItems(FXCollections.observableArrayList(Category.values()));
+        box.setValue(dataValue.getValue().getCategory());
+        box.getSelectionModel().selectedItemProperty().addListener(
+                (options, oldValue, newValue) -> onCategoryChange(dataValue.getValue(), newValue)
+        );
+        return new SimpleObjectProperty<>(box);
+    }
+
+    private void onCategoryChange(BankStatementItemViewModel dataValue, Category newValue) {
+        dataValue.setCategory(newValue);
+        bankStatementService.updateBankStatementItem(dataValue);
     }
 
     private FXMLLoader getLoader() {
