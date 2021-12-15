@@ -8,6 +8,7 @@
     <center>
         <TableView fx:id="statementsTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
+                <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Category"/>
                 <TableColumn fx:id="operationDescriptionColumn" prefWidth="75.0" text="Operation description"/>
                 <TableColumn fx:id="cardAccountNumberColumn" prefWidth="75.0" text="Card account number"/>
                 <TableColumn fx:id="sumColumn" prefWidth="75.0" text="Sum"/>
