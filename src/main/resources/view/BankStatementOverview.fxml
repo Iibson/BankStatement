@@ -8,6 +8,7 @@
     <center>
         <TableView fx:id="statementsTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
+                <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Category"/>
                 <TableColumn fx:id="operationDescriptionColumn" prefWidth="75.0" text="Operation description"/>
                 <TableColumn fx:id="cardAccountNumberColumn" prefWidth="75.0" text="Card account number"/>
                 <TableColumn fx:id="sumColumn" prefWidth="75.0" text="Sum"/>
@@ -21,13 +22,18 @@
 
     </center>
     <top>
-        <BorderPane prefHeight="50.0" prefWidth="800.0" BorderPane.alignment="BOTTOM_RIGHT">
+        <BorderPane prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="BOTTOM_LEFT">
             <padding>
                 <Insets top="15" right="25" bottom="15" left="25"/>
             </padding>
             <left>
                 <Button prefWidth="150" mnemonicParsing="false"
                         onAction="#handleStatistics" text="Statistics" BorderPane.alignment="BOTTOM_LEFT">
+                </Button>
+            </left>
+            <left>
+                <Button prefWidth="100" mnemonicParsing="false"
+                        onAction="#handleEdit" text="Edit" BorderPane.alignment="BOTTOM_LEFT">
                 </Button>
             </left>
             <right>

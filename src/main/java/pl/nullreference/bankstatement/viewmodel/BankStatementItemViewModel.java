@@ -2,6 +2,7 @@ package pl.nullreference.bankstatement.viewmodel;
 
 import javafx.beans.property.*;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
+import pl.nullreference.bankstatement.model.bankstatement.Category;
 
 import java.util.Date;
 
@@ -13,8 +14,9 @@ public class BankStatementItemViewModel {
     private DoubleProperty sum;
     private StringProperty currency;
     private DoubleProperty balance;
+    private ObjectProperty<Category> category;
 
-    public BankStatementItemViewModel(BankStatementItem bankStatementItem){
+    public BankStatementItemViewModel(BankStatementItem bankStatementItem) {
         this.id = new SimpleIntegerProperty(bankStatementItem.getId());
         this.operationDate = new SimpleObjectProperty<>(bankStatementItem.getOperationDate());
         this.operationDescription = new SimpleStringProperty(bankStatementItem.getOperationDescription());
@@ -22,6 +24,20 @@ public class BankStatementItemViewModel {
         this.sum = new SimpleDoubleProperty(bankStatementItem.getSum());
         this.currency = new SimpleStringProperty(bankStatementItem.getCurrency());
         this.balance = new SimpleDoubleProperty(bankStatementItem.getBalance());
+        this.category = new SimpleObjectProperty<>(bankStatementItem.getCategory());
+    }
+
+
+    public Category getCategory() {
+        return category.get();
+    }
+
+    public ObjectProperty<Category> categoryProperty() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category.set(category);
     }
 
     public int getId() {
