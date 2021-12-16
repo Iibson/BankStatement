@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.nullreference.bankstatement.controller.BankStatementStatisticsController">
+    <VBox alignment="CENTER" spacing="10.0">
+        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0" spacing="20.0">
+            <Label text="Starting date:" />
+            <DatePicker fx:id="startingDatePicker"/>
+            <Label text="Ending date:" />
+            <DatePicker fx:id="endingDatePicker"/>
+            <Button text="Generate charts" onAction="#handleGenerateCharts"/>
+        </HBox>
+        <Label fx:id="errorMessageLabel" textFill="red" visible="false"/>
+        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0" spacing="20.0">
+            <CheckBox text="Last month" fx:id="lastMonthCheckBox" onAction="#handlePresetChosen"/>
+            <CheckBox text="Last six months" fx:id="lastSixMonthsCheckBox" onAction="#handlePresetChosen"/>
+            <CheckBox text="Last year" fx:id="lastYearCheckBox" onAction="#handlePresetChosen"/>
+            <CheckBox text="All time" fx:id="allTimeCheckBox" onAction="#handlePresetChosen"/>
+        </HBox>
+      <padding>
+         <Insets bottom="10.0" top="10.0" />
+      </padding>
+    </VBox>
+    <TabPane prefHeight="500.0" prefWidth="800.0">
+        <Tab closable="false" text="Expenses &amp; incomes">
+            <BorderPane>
+                <center>
+                    <BarChart fx:id="expensesIncomesChart" legendVisible="false">
+                        <xAxis>
+                            <CategoryAxis fx:id="expensesIncomesChartXAxis" side="BOTTOM" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis fx:id="expensesIncomesChartYAxis" side="LEFT" />
+                        </yAxis>
+                    </BarChart>
+                </center>
+            </BorderPane>
+        </Tab>
+        <Tab closable="false" text="Expenses by category">
+            <BorderPane>
+                <center>
+                    <PieChart fx:id="expensesCategoryChart" />
+                </center>
+            </BorderPane>
+        </Tab>
+    </TabPane>
+</VBox>

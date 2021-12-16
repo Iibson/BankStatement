@@ -5,10 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
@@ -23,10 +23,14 @@ import java.util.List;
 @Component
 public class BankStatementOverviewController {
 
+    private static final String BANK_STATEMENT_DIALOG_FXML = "/view/ImportBankStatementDialog.fxml";
+    private static final String BANK_STATEMENT_STATISTICS_FXML = "/view/BankStatementStatistics.fxml";
+
     private BankStatementService bankStatementService;
     private Stage primaryStage;
 
     private BankStatementItemListViewModel statementItemList;
+
     @FXML
     private TableView<BankStatementItemViewModel> statementsTable;
 
@@ -63,16 +67,16 @@ public class BankStatementOverviewController {
         balanceColumn.setCellValueFactory(dataValue -> dataValue.getValue().balanceProperty().asObject());
     }
 
-    private FXMLLoader getLoader() {
+    private FXMLLoader getLoader(String resourceName) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(BankStatementOverviewController.class.getResource("/view/ImportBankStatementDialog.fxml"));
+        loader.setLocation(BankStatementOverviewController.class.getResource(resourceName));
         return loader;
     }
 
-    private Stage createStage(BorderPane page) {
+    private Stage createStage(Region page, String stageTitle) {
         // Create the dialog Stage.
         Stage dialogStage = new Stage();
-        dialogStage.setTitle("Import new statement");
+        dialogStage.setTitle(stageTitle);
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(primaryStage);
         Scene scene = new Scene(page);
@@ -89,9 +93,9 @@ public class BankStatementOverviewController {
     private void handleImport(ActionEvent event) {
         try {
             // Load the fxml file and create a new stage for the dialog
-            FXMLLoader loader = getLoader();
+            FXMLLoader loader = getLoader(BANK_STATEMENT_DIALOG_FXML);
             BorderPane page = loader.load();
-            Stage dialogStage = createStage(page);
+            Stage dialogStage = createStage(page, "Import new statement");
             BankStatementImportDialogController controller = loader.getController();
             initDataInImportController(controller, dialogStage);
             dialogStage.showAndWait();
@@ -101,6 +105,21 @@ public class BankStatementOverviewController {
                     Platform.runLater(() -> this.addNewBankStatement(importedStatement));
                 }).start();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleStatistics(ActionEvent event) {
+        ((Button)event.getSource()).getParent().requestFocus();
+        try {
+            FXMLLoader loader = getLoader(BANK_STATEMENT_STATISTICS_FXML);
+            VBox page = loader.load();
+            Stage statisticsStage = createStage(page, "Transaction statistics");
+            BankStatementStatisticsController controller = loader.getController();
+            //initDataInStatisticsController();
+            statisticsStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

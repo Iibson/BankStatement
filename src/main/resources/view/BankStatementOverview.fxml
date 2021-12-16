@@ -25,6 +25,11 @@
             <padding>
                 <Insets top="15" right="25" bottom="15" left="25"/>
             </padding>
+            <left>
+                <Button prefWidth="150" mnemonicParsing="false"
+                        onAction="#handleStatistics" text="Statistics" BorderPane.alignment="BOTTOM_LEFT">
+                </Button>
+            </left>
             <right>
                 <Button prefWidth="150" mnemonicParsing="false"
                         onAction="#handleImport" text="Import" BorderPane.alignment="BOTTOM_RIGHT">
