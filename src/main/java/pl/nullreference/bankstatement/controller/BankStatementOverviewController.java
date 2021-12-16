@@ -29,6 +29,7 @@ public class BankStatementOverviewController {
 
     private static final String BANK_STATEMENT_DIALOG_FXML = "/view/ImportBankStatementDialog.fxml";
     private static final String BANK_STATEMENT_STATISTICS_FXML = "/view/BankStatementStatistics.fxml";
+    private static final String BANK_STATEMENT_ITEM_EDIT_FXML = "/view/EditBankStatementItem.fxml";
 
     private BankStatementService bankStatementService;
     private Stage primaryStage;
@@ -121,6 +122,7 @@ public class BankStatementOverviewController {
 
     @FXML
     private void handleImport(ActionEvent event) {
+        ((Button)event.getSource()).getParent().requestFocus();
         try {
             // Load the fxml file and create a new stage for the dialog
             FXMLLoader loader = getLoader(BANK_STATEMENT_DIALOG_FXML);
@@ -148,7 +150,7 @@ public class BankStatementOverviewController {
             VBox page = loader.load();
             Stage statisticsStage = createStage(page, "Transaction statistics");
             BankStatementStatisticsController controller = loader.getController();
-            //initDataInStatisticsController();
+            controller.setBankStatementService(bankStatementService);
             statisticsStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -157,6 +159,7 @@ public class BankStatementOverviewController {
 
     @FXML
     private void handleEdit(ActionEvent event) {
+        ((Button)event.getSource()).getParent().requestFocus();
         try {
 
             BankStatementItemViewModel bankStatementItemViewModel = statementsTable.getSelectionModel()
@@ -166,7 +169,7 @@ public class BankStatementOverviewController {
                 return;
             }
             // Load the fxml file and create a new stage for the dialog
-            FXMLLoader loader = getLoader("/view/EditBankStatementItem.fxml");
+            FXMLLoader loader = getLoader(BANK_STATEMENT_ITEM_EDIT_FXML);
             BorderPane page = loader.load();
             Stage dialogStage = createStage(page, "Edit Bank Statement Item");
             BankStatementItemEditController controller = loader.getController();
@@ -182,11 +185,11 @@ public class BankStatementOverviewController {
         }
     }
 
-    private void showNoBankStatementItemSelectedAlert()
-    {
+    private void showNoBankStatementItemSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.NONE, "Proszę wybrać element do edycji.", ButtonType.OK);
         alert.show();
     }
+
     public void initData() {
         List<BankStatement> allStatements = this.bankStatementService.getAllBankStatements();
         allStatements.forEach(statement -> statement.getItems()

@@ -16,6 +16,7 @@ import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
 import javax.swing.text.html.Option;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
@@ -62,6 +63,7 @@ public class BankStatementService {
             itemDB.setSum(item.getSum());
             itemDB.setCurrency(item.getCurrency());
             itemDB.setBalance(item.getBalance());
+            itemDB.setCategory(item.getCategory());
             bankStatementItemRepository.save(itemDB);
         });
     }
@@ -71,5 +73,9 @@ public class BankStatementService {
                 .map(Provider::getName)
                 .distinct()
                 .toList();
+    }
+
+    public List<BankStatementItem> getBankStatementItemsBetweenDates(Date startingDate, Date endingDate) {
+        return bankStatementItemRepository.findByOperationDateBetween(startingDate, endingDate);
     }
 }

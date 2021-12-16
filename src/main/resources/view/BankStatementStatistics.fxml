@@ -9,9 +9,9 @@
     <VBox alignment="CENTER" spacing="10.0">
         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0" spacing="20.0">
             <Label text="Starting date:" />
-            <DatePicker fx:id="startingDatePicker"/>
+            <DatePicker fx:id="startingDatePicker" onAction="#handleDateChosen"/>
             <Label text="Ending date:" />
-            <DatePicker fx:id="endingDatePicker"/>
+            <DatePicker fx:id="endingDatePicker" onAction="#handleDateChosen"/>
             <Button text="Generate charts" onAction="#handleGenerateCharts"/>
         </HBox>
         <Label fx:id="errorMessageLabel" textFill="red" visible="false"/>
@@ -31,10 +31,10 @@
                 <center>
                     <BarChart fx:id="expensesIncomesChart" legendVisible="false">
                         <xAxis>
-                            <CategoryAxis fx:id="expensesIncomesChartXAxis" side="BOTTOM" />
+                            <CategoryAxis side="BOTTOM" />
                         </xAxis>
                         <yAxis>
-                            <NumberAxis fx:id="expensesIncomesChartYAxis" side="LEFT" />
+                            <NumberAxis side="LEFT" />
                         </yAxis>
                     </BarChart>
                 </center>
@@ -43,7 +43,7 @@
         <Tab closable="false" text="Expenses by category">
             <BorderPane>
                 <center>
-                    <PieChart fx:id="expensesCategoryChart" />
+                    <PieChart fx:id="expensesByCategoryChart" />
                 </center>
             </BorderPane>
         </Tab>

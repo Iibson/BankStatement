@@ -31,11 +31,11 @@
                         onAction="#handleStatistics" text="Statistics" BorderPane.alignment="BOTTOM_LEFT">
                 </Button>
             </left>
-            <left>
+            <center>
                 <Button prefWidth="100" mnemonicParsing="false"
-                        onAction="#handleEdit" text="Edit" BorderPane.alignment="BOTTOM_LEFT">
+                        onAction="#handleEdit" text="Edit" BorderPane.alignment="BOTTOM_CENTER">
                 </Button>
-            </left>
+            </center>
             <right>
                 <Button prefWidth="150" mnemonicParsing="false"
                         onAction="#handleImport" text="Import" BorderPane.alignment="BOTTOM_RIGHT">
