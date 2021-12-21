@@ -2,10 +2,11 @@ package pl.nullreference.bankstatement.controller;
 
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.RequiredArgsConstructor;
-import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
 import pl.nullreference.bankstatement.services.BankStatementService;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
 
@@ -33,6 +34,9 @@ public class BankStatementItemEditController {
     @FXML
     private TextField balanceTextField;
 
+    @FXML
+    private Label errorMessageLabel;
+
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
@@ -42,6 +46,34 @@ public class BankStatementItemEditController {
         this.bankStatementService = bankStatementService;
     }
 
+    public boolean isTextFieldsValid() {
+        if(!cardAccountNumberTextField.getText().matches("^[^a-zA-Z]*$")) {
+            showErrorMessage("CardAccountNumber can only contain numbers.");
+            return false;
+        }
+
+        if(!sumTextField.getText().matches("\\A[-]?[0-9]+[,.]?[0-9]*\\Z")) {
+            showErrorMessage("Sum can only contain decimal number");
+            return false;
+        }
+
+
+        if(!balanceTextField.getText().matches("\\A[-]?[0-9]+[,.]?[0-9]*\\Z")) {
+            showErrorMessage("Balance can only contain decimal number");
+            return false;
+        }
+        return true;
+    }
+
+    private void showErrorMessage(String errorMessage) {
+        errorMessageLabel.setTextFill(Color.web("#FF0000"));
+        errorMessageLabel.setText(errorMessage);
+    }
+
+    private void hideErrorMessage() {
+        errorMessageLabel.setText("");
+    }
+
     @FXML
     private void handleCancelAction() {
         dialogStage.close();
@@ -49,9 +81,11 @@ public class BankStatementItemEditController {
 
     @FXML
     private void handleOkAction() {
-        // validate() needed
-        updateModel();
-        dialogStage.close();
+        if (isTextFieldsValid()) {
+            updateModel();
+            hideErrorMessage();
+            dialogStage.close();
+        }
     }
 
     public void setData(BankStatementItemViewModel bankStatementItemViewModel) {
