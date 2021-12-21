@@ -10,6 +10,6 @@ public enum Category {
     ENTERTAINMENT;
 
     public String toString() {
-        return this.name().toLowerCase(Locale.ROOT);
+        return this.name().substring(0, 1).toUpperCase(Locale.ROOT) + this.name().substring(1).toLowerCase(Locale.ROOT);
     }
 }
