@@ -6,11 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import lombok.RequiredArgsConstructor;
+import pl.nullreference.bankstatement.exception.InvalidTextFieldException;
+import pl.nullreference.bankstatement.services.Validator;
 import pl.nullreference.bankstatement.services.BankStatementService;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
 
-@RequiredArgsConstructor
 public class BankStatementItemEditController {
 
     private BankStatementService bankStatementService;
@@ -18,6 +18,8 @@ public class BankStatementItemEditController {
     private BankStatementItemViewModel bankStatementItemViewModel;
 
     private Stage dialogStage;
+
+    private Validator validator;
 
     @FXML
     private TextField descriptionTextField;
@@ -37,32 +39,22 @@ public class BankStatementItemEditController {
     @FXML
     private Label errorMessageLabel;
 
-
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
+    }
+
+    public void initValidator() {
+        this.validator = new Validator();
     }
 
     public void setBankStatementService(BankStatementService bankStatementService) {
         this.bankStatementService = bankStatementService;
     }
 
-    public boolean isTextFieldsValid() {
-        if(!cardAccountNumberTextField.getText().matches("^[^a-zA-Z]*$")) {
-            showErrorMessage("CardAccountNumber can only contain numbers.");
-            return false;
-        }
-
-        if(!sumTextField.getText().matches("\\A[-]?[0-9]+[,.]?[0-9]*\\Z")) {
-            showErrorMessage("Sum can only contain decimal number");
-            return false;
-        }
-
-
-        if(!balanceTextField.getText().matches("\\A[-]?[0-9]+[,.]?[0-9]*\\Z")) {
-            showErrorMessage("Balance can only contain decimal number");
-            return false;
-        }
-        return true;
+    public void isTextFieldsValid() throws InvalidTextFieldException {
+        validator.validateIntegerNumber(cardAccountNumberTextField, "CardAccountNumber");
+        validator.validateDecimalNumber(sumTextField, "Sum");
+        validator.validateDecimalNumber(balanceTextField, "Balance");
     }
 
     private void showErrorMessage(String errorMessage) {
@@ -81,10 +73,13 @@ public class BankStatementItemEditController {
 
     @FXML
     private void handleOkAction() {
-        if (isTextFieldsValid()) {
+        try {
+            isTextFieldsValid();
             updateModel();
             hideErrorMessage();
             dialogStage.close();
+        } catch (InvalidTextFieldException e) {
+            showErrorMessage(e.getMessage());
         }
     }
 
