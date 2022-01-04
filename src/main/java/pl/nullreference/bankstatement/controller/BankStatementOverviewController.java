@@ -101,7 +101,6 @@ public class BankStatementOverviewController {
     }
 
     private Stage createStage(Region page, String stageTitle) {
-        // Create the dialog Stage.
         Stage dialogStage = new Stage();
         dialogStage.setTitle(stageTitle);
         dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -116,7 +115,8 @@ public class BankStatementOverviewController {
         controller.setDialogStage(stage);
     }
 
-    private void initDataInImportController(BankStatementItemEditController controller, Stage stage) {
+    private void initDataInEditController(BankStatementItemEditController controller, Stage stage) {
+        controller.initValidator();
         controller.setDialogStage(stage);
     }
 
@@ -124,7 +124,6 @@ public class BankStatementOverviewController {
     private void handleImport(ActionEvent event) {
         ((Button)event.getSource()).getParent().requestFocus();
         try {
-            // Load the fxml file and create a new stage for the dialog
             FXMLLoader loader = getLoader(BANK_STATEMENT_DIALOG_FXML);
             BorderPane page = loader.load();
             Stage dialogStage = createStage(page, "Import new statement");
@@ -146,12 +145,7 @@ public class BankStatementOverviewController {
     private void handleStatistics(ActionEvent event) {
         ((Button)event.getSource()).getParent().requestFocus();
         try {
-            FXMLLoader loader = getLoader(BANK_STATEMENT_STATISTICS_FXML);
-            VBox page = loader.load();
-            Stage statisticsStage = createStage(page, "Transaction statistics");
-            BankStatementStatisticsController controller = loader.getController();
-            controller.setBankStatementService(bankStatementService);
-            statisticsStage.show();
+            loadStatisticsDialog();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -168,21 +162,34 @@ public class BankStatementOverviewController {
                 showNoBankStatementItemSelectedAlert();
                 return;
             }
-            // Load the fxml file and create a new stage for the dialog
-            FXMLLoader loader = getLoader(BANK_STATEMENT_ITEM_EDIT_FXML);
-            BorderPane page = loader.load();
-            Stage dialogStage = createStage(page, "Edit Bank Statement Item");
-            BankStatementItemEditController controller = loader.getController();
-            initDataInImportController(controller, dialogStage);
-
-            controller.setData(bankStatementItemViewModel);
-            controller.setBankStatementService(bankStatementService);
-
-            dialogStage.showAndWait();
+            loadEditDialog(bankStatementItemViewModel);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadStatisticsDialog() throws IOException{
+        FXMLLoader loader = getLoader(BANK_STATEMENT_STATISTICS_FXML);
+        VBox page = loader.load();
+        Stage statisticsStage = createStage(page, "Transaction statistics");
+        BankStatementStatisticsController controller = loader.getController();
+        controller.setBankStatementService(bankStatementService);
+        statisticsStage.show();
+    }
+
+
+    private void loadEditDialog(BankStatementItemViewModel bankStatementItemViewModel) throws IOException{
+        FXMLLoader loader = getLoader(BANK_STATEMENT_ITEM_EDIT_FXML);
+        BorderPane page = loader.load();
+        Stage dialogStage = createStage(page, "Edit Bank Statement Item");
+        BankStatementItemEditController controller = loader.getController();
+        initDataInEditController(controller, dialogStage);
+
+        controller.setData(bankStatementItemViewModel);
+        controller.setBankStatementService(bankStatementService);
+
+        dialogStage.showAndWait();
     }
 
     private void showNoBankStatementItemSelectedAlert() {
