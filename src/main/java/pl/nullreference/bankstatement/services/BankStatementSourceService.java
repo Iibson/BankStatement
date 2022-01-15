@@ -6,26 +6,45 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.nullreference.bankstatement.model.source.BankStatementSource;
 import pl.nullreference.bankstatement.model.source.SourceType;
 import pl.nullreference.bankstatement.services.repositories.BankStatementSourceRepository;
+import pl.nullreference.bankstatement.sourceObserver.SourceObserver;
+import pl.nullreference.bankstatement.sourceObserver.dto.SourceObserverResultDto;
+import pl.nullreference.bankstatement.sourceObserver.handler.SourceObserverHandler;
+import rx.Observable;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class BankStatementSourceService {
 
     private final BankStatementSourceRepository bankStatementSourceRepository;
+    private final SourceObserverHandler handler;
+
+    public BankStatementSourceService(BankStatementSourceRepository bankStatementSourceRepository) {
+        this.bankStatementSourceRepository = bankStatementSourceRepository;
+        this.handler = new SourceObserverHandler(getAllBanksStatementSources());
+    }
+
+    public Observable<SourceObserverResultDto> getFilesAsObservable() {
+        return handler.getFilesAsObservable();
+    }
+
+    public void refreshSourceObserves() {
+        handler.refreshSourceObserves();
+    }
+
+    public void resetObservedBankStatementSources() {
+        handler.resetList(getAllBanksStatementSources());
+    }
 
     @Transactional
     public void addBankStatementSource(BankStatementSource bankStatementSource) {
-        bankStatementSourceRepository.save(bankStatementSource);
+        var source = bankStatementSourceRepository.save(bankStatementSource);
+        handler.addBankStatementSource(source);
     }
 
-    @Transactional
-    public BankStatementSource addBankStatementSourceAndReturnIt(BankStatementSource bankStatementSource) {
-        return bankStatementSourceRepository.save(bankStatementSource);
-    }
-
-    public List<BankStatementSource> getBankStatementSourcesForSourceType(SourceType type) {
-        return bankStatementSourceRepository.findByType(type);
+    public List<BankStatementSource> getAllBanksStatementSources() {
+        return (List<BankStatementSource>) bankStatementSourceRepository.findAll();
     }
 }

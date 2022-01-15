@@ -12,6 +12,7 @@ import pl.nullreference.bankstatement.services.repositories.BankStatementReposit
 import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.services.repositories.ProviderRepository;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
+import rx.Observable;
 
 import javax.swing.text.html.Option;
 import java.io.File;
@@ -33,6 +34,8 @@ public class BankStatementService {
 
     private final DeserializerFactory deserializerFactory;
 
+    private final BankStatementSourceService sourceService;
+
     public List<BankStatement> getAllBankStatements() {
         List<BankStatement> bankStatements = new ArrayList<>();
         bankStatementRepository.findAll()
@@ -40,11 +43,26 @@ public class BankStatementService {
         return bankStatements;
     }
 
+    public Observable<BankStatement> getBankStatementsAsObservable() {
+        return sourceService.getFilesAsObservable()
+                .map(x -> parseAndSave(x.getFile(), x.getProvider()));
+    }
+
     @Transactional
     public BankStatement parseAndSave(File file, String bankName) {
         String filename = file.getName();
         String extension = filename.substring(filename.lastIndexOf(".") + 1);
         Provider provider = providerRepository.findByNameAndExtension(bankName, extension);
+        try{
+            Deserializer deserializer = deserializerFactory.getDeserializer(provider, file);
+            BankStatement bankStatement = deserializer.deserialize();
+            return bankStatementRepository.save(bankStatement);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public BankStatement parseAndSave(File file, Provider provider) {
         try{
             Deserializer deserializer = deserializerFactory.getDeserializer(provider, file);
             BankStatement bankStatement = deserializer.deserialize();
