@@ -3,12 +3,13 @@ package pl.nullreference.bankstatement.sourceObserver.base;
 import pl.nullreference.bankstatement.model.source.BankStatementSource;
 import pl.nullreference.bankstatement.sourceObserver.SourceObserver;
 import pl.nullreference.bankstatement.sourceObserver.dto.SourceObserverResultDto;
-import rx.subjects.BehaviorSubject;
+import rx.subjects.ReplaySubject;
+
 import java.util.List;
 
 public abstract class BaseSourceObserver implements SourceObserver {
     protected final List<BankStatementSource> bankStatementSources;
-    protected BehaviorSubject<SourceObserverResultDto> subject = BehaviorSubject.create();
+    protected ReplaySubject<SourceObserverResultDto> subject = ReplaySubject.create();
 
 
     public BaseSourceObserver(List<BankStatementSource> bankStatementSources) {

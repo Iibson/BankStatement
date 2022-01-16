@@ -1,7 +1,7 @@
 package pl.nullreference.bankstatement.sourceObserver.handler;
 
 import javafx.util.Pair;
-import org.apache.commons.lang3.NotImplementedException;
+import pl.nullreference.bankstatement.FolderSourceObserver;
 import pl.nullreference.bankstatement.model.source.BankStatementSource;
 import pl.nullreference.bankstatement.model.source.SourceType;
 import pl.nullreference.bankstatement.sourceObserver.SourceObserver;
@@ -58,7 +58,7 @@ public class SourceObserverHandler {
     private SourceObserver createSourceObserver(SourceType type, List<BankStatementSource> bankStatementSources) {
         return switch (type) {
             case ENDPOINT -> new RestSourceObserver(bankStatementSources);
-            case DIRECTORY -> null;
+            case DIRECTORY -> new FolderSourceObserver(bankStatementSources);
         };
     }
 
