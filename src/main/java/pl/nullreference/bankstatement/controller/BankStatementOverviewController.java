@@ -14,6 +14,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.model.bankstatement.Category;
@@ -23,6 +24,8 @@ import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Component
 public class BankStatementOverviewController {
@@ -30,6 +33,7 @@ public class BankStatementOverviewController {
     private static final String BANK_STATEMENT_DIALOG_FXML = "/view/ImportBankStatementDialog.fxml";
     private static final String BANK_STATEMENT_STATISTICS_FXML = "/view/BankStatementStatistics.fxml";
     private static final String BANK_STATEMENT_ITEM_EDIT_FXML = "/view/EditBankStatementItem.fxml";
+    private static final String BANK_STATEMENT_DATA_SOURCES_FXML = "/view/DataSourcesDialog.fxml";
 
     private BankStatementService bankStatementService;
     private Stage primaryStage;
@@ -57,6 +61,9 @@ public class BankStatementOverviewController {
     @FXML
     private TableColumn<BankStatementItemViewModel, ComboBox<Category>> categoryColumn;
 
+    private Timer timer;
+    private boolean isTimerExecuting;
+
     public BankStatementOverviewController(BankStatementService bankStatementService) {
         this.bankStatementService = bankStatementService;
         this.statementItemList = new BankStatementItemListViewModel();
@@ -66,6 +73,8 @@ public class BankStatementOverviewController {
     private void initialize() {
         this.initData();
         this.initializeDataTable();
+        this.setAutoRefresh();
+
     }
 
     private void initializeDataTable() {
@@ -122,7 +131,7 @@ public class BankStatementOverviewController {
 
     @FXML
     private void handleImport(ActionEvent event) {
-        ((Button)event.getSource()).getParent().requestFocus();
+        ((Button) event.getSource()).getParent().requestFocus();
         try {
             FXMLLoader loader = getLoader(BANK_STATEMENT_DIALOG_FXML);
             BorderPane page = loader.load();
@@ -143,7 +152,7 @@ public class BankStatementOverviewController {
 
     @FXML
     private void handleStatistics(ActionEvent event) {
-        ((Button)event.getSource()).getParent().requestFocus();
+        ((Button) event.getSource()).getParent().requestFocus();
         try {
             loadStatisticsDialog();
         } catch (IOException e) {
@@ -153,9 +162,8 @@ public class BankStatementOverviewController {
 
     @FXML
     private void handleEdit(ActionEvent event) {
-        ((Button)event.getSource()).getParent().requestFocus();
+        ((Button) event.getSource()).getParent().requestFocus();
         try {
-
             BankStatementItemViewModel bankStatementItemViewModel = statementsTable.getSelectionModel()
                     .getSelectedItem();
             if (bankStatementItemViewModel == null) {
@@ -169,7 +177,29 @@ public class BankStatementOverviewController {
         }
     }
 
-    private void loadStatisticsDialog() throws IOException{
+    @FXML
+    private void refreshDataSources() {
+        new Thread(() -> {
+            if (!isTimerExecuting) {
+                System.out.println("Manually refreshing");
+                this.bankStatementService.refreshSources();
+            }
+        }).start();
+    }
+
+    @FXML
+    private void handleDataSources() throws IOException {
+        FXMLLoader loader = getLoader(BANK_STATEMENT_DATA_SOURCES_FXML);
+        VBox page = loader.load();
+        Stage dataSourcesStage = createStage(page, "Manage data sources");
+        BankStatementDataSourcesController controller = loader.getController();
+        controller.setProvidersBoxes(this.bankStatementService.getAllProviders());
+        controller.setBankStatementService(bankStatementService);
+        controller.setDialogStage(dataSourcesStage);
+        dataSourcesStage.show();
+    }
+
+    private void loadStatisticsDialog() throws IOException {
         FXMLLoader loader = getLoader(BANK_STATEMENT_STATISTICS_FXML);
         VBox page = loader.load();
         Stage statisticsStage = createStage(page, "Transaction statistics");
@@ -179,7 +209,7 @@ public class BankStatementOverviewController {
     }
 
 
-    private void loadEditDialog(BankStatementItemViewModel bankStatementItemViewModel) throws IOException{
+    private void loadEditDialog(BankStatementItemViewModel bankStatementItemViewModel) throws IOException {
         FXMLLoader loader = getLoader(BANK_STATEMENT_ITEM_EDIT_FXML);
         BorderPane page = loader.load();
         Stage dialogStage = createStage(page, "Edit Bank Statement Item");
@@ -201,10 +231,29 @@ public class BankStatementOverviewController {
         List<BankStatement> allStatements = this.bankStatementService.getAllBankStatements();
         allStatements.forEach(statement -> statement.getItems()
                 .forEach(item -> this.statementItemList.addBankStatementItemViewModel(new BankStatementItemViewModel(item))));
+        this.bankStatementService.getBankStatementsAsObservable().subscribe(statement -> {
+            System.out.println("Received new bank statement: " + statement);
+            statement.getItems().forEach(item -> this.statementItemList.addBankStatementItemViewModel(new BankStatementItemViewModel(item)));
+        });
     }
 
     public void addNewBankStatement(BankStatement bankStatement) {
         bankStatement.getItems().forEach(item -> this.statementItemList.addBankStatementItemViewModel(new BankStatementItemViewModel(item)));
     }
 
+    private void setAutoRefresh() {
+        this.timer = new Timer();
+        this.timer.schedule(new TimerTask() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                isTimerExecuting = true;
+                System.out.println("Refreshing data sources started...");
+                Thread.sleep(10000);
+                bankStatementService.refreshSources();
+                System.out.println("Refreshing data sources ended...");
+                isTimerExecuting = false;
+            }
+        }, 1000, 30000);
+    }
 }

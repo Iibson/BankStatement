@@ -6,4 +6,6 @@ import pl.nullreference.bankstatement.model.provider.Provider;
 public interface ProviderRepository extends CrudRepository<Provider, Integer> {
 
     Provider findByNameAndExtension(String name, String extension);
+
+    Provider findByName(String name);
 }

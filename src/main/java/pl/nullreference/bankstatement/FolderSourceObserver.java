@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class FolderSourceObserver extends BaseSourceObserver {
 
-    private final String SEPARATOR = System.getProperty("file.separator");
-    private final String DIR = "bankstatementsource" + SEPARATOR;
+    private final String SEPARATOR;
+    private String DIR;
     private final LinkedList<SourceObserverResultDto> filesToUpdate = new LinkedList<>();
     Map<WatchKey, Path> keyMap = new HashMap<>();
     Map<String, Provider> providerMap = new HashMap<>();
@@ -26,6 +26,11 @@ public class FolderSourceObserver extends BaseSourceObserver {
 
     public FolderSourceObserver(List<BankStatementSource> bankStatementSources) {
         super(bankStatementSources);
+        this.SEPARATOR = System.getProperty("file.separator");
+        this.DIR = "bankstatementsource" + SEPARATOR;
+        if (this.SEPARATOR.equals("\\")) {
+            this.DIR += this.SEPARATOR;
+        }
         try {
             watchService = FileSystems.getDefault().newWatchService();
             initObservers();
@@ -36,7 +41,7 @@ public class FolderSourceObserver extends BaseSourceObserver {
     }
 
     public void initObservers() {
-        for (BankStatementSource source: this.bankStatementSources) {
+        for (BankStatementSource source : this.bankStatementSources) {
             registerObserver(source);
         }
     }
@@ -61,7 +66,7 @@ public class FolderSourceObserver extends BaseSourceObserver {
     }
 
     private void startObserveFolders() {
-        new Thread (() -> {
+        new Thread(() -> {
             try {
                 WatchKey key;
                 while ((key = watchService.take()) != null) {
@@ -113,6 +118,7 @@ public class FolderSourceObserver extends BaseSourceObserver {
 
 
     private String getSourcePath(String fileName, String relativePath) {
-        return fileName.split(DIR)[1].split( SEPARATOR + relativePath)[0];
+        return fileName.split(DIR)[1].split(
+                (this.SEPARATOR.equals("\\") ? this.SEPARATOR + this.SEPARATOR : this.SEPARATOR) + relativePath)[0];
     }
 }

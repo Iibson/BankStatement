@@ -1,12 +1,14 @@
 package pl.nullreference.bankstatement.services;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nullreference.bankstatement.deserializer.Deserializer;
 import pl.nullreference.bankstatement.deserializer.factory.DeserializerFactory;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatement;
 import pl.nullreference.bankstatement.model.bankstatement.BankStatementItem;
+import pl.nullreference.bankstatement.model.source.BankStatementSource;
 import pl.nullreference.bankstatement.services.repositories.BankStatementItemRepository;
 import pl.nullreference.bankstatement.services.repositories.BankStatementRepository;
 import pl.nullreference.bankstatement.model.provider.Provider;
@@ -42,14 +44,18 @@ public class BankStatementService {
                 .forEach(bankStatements::add);
         return bankStatements;
     }
+    public void addBankStatementSource(BankStatementSource newSource){
+        this.sourceService.addBankStatementSource(newSource);
+    }
 
     public Observable<BankStatement> getBankStatementsAsObservable() {
         return sourceService.getFilesAsObservable()
-                .map(x -> parseAndSave(x.getFile(), x.getProvider()));
+                .map(x -> parseAndSave(x.getFile(), x.getProvider().getName()));
     }
 
     @Transactional
     public BankStatement parseAndSave(File file, String bankName) {
+
         String filename = file.getName();
         String extension = filename.substring(filename.lastIndexOf(".") + 1);
         Provider provider = providerRepository.findByNameAndExtension(bankName, extension);
@@ -92,8 +98,21 @@ public class BankStatementService {
                 .distinct()
                 .toList();
     }
+    public Provider getProviderByNameAndExtension(String name, String extension){
+        return this.providerRepository.findByNameAndExtension(name,extension);
+    }
 
     public List<BankStatementItem> getBankStatementItemsBetweenDates(Date startingDate, Date endingDate) {
         return bankStatementItemRepository.findByOperationDateBetween(startingDate, endingDate);
+    }
+    public List<String> getProviderExtensions(String providerName){
+        return StreamSupport.stream(providerRepository.findAll().spliterator(), false)
+                .filter(p -> p.getName().equals(providerName))
+                .map(Provider::getExtension)
+                .distinct()
+                .toList();
+    }
+    public void refreshSources(){
+        this.sourceService.refreshSourceObserves();
     }
 }

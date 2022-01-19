@@ -72,12 +72,18 @@ public class RestSourceObserver extends BaseSourceObserver {
     }
 
     public void refresh() {
-        services.forEach(endpoint ->
-                subject.onNext(
-                        SourceObserverResultDto.builder()
-                                .provider(endpoint.getKey())
-                                .file(getEndpointResult(endpoint.getValue()))
-                                .build()));
+//        services.forEach(endpoint -> {
+//            var x = getEndpointResult(endpoint.getValue());
+//            if (x != null) {
+//                subject.onNext(
+//                        SourceObserverResultDto.builder()
+//                                .provider(endpoint.getKey())
+//                                .file(x)
+//                                .build());
+//            }
+//
+//        });
+
     }
 
     private Retrofit buildRetrofit(String endpointPath) {

@@ -22,23 +22,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9db3d6f9-bd15-4ee7-9bd3-aa2e6f2b7993" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/staticData/MappingValuesData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/staticData/SettingsData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="9db3d6f9-bd15-4ee7-9bd3-aa2e6f2b7993" name="Default Changelist" comment="Fix merge bug">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/controller/BankStatementDataSourcesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/DataSourcesDialog.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bankstatement.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bankstatement.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/CsvDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/CsvDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/IDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/Deserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/base/BaseDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/base/BaseDeserializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/factory/DeserializerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/deserializer/factory/DeserializerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/FolderSourceObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/FolderSourceObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/controller/BankStatementOverviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/controller/BankStatementOverviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/provider/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/provider/Provider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/BankStatementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/BankStatementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/CsvDeserializerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/CsvDeserializerTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/DeserializerFactoryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/DeserializerFactoryTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/BankStatementSourceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/BankStatementSourceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/repositories/ProviderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/repositories/ProviderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/sourceObserver/rest/RestSourceObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/sourceObserver/rest/RestSourceObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/BankStatementOverview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/BankStatementOverview.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/wyciag_ing.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/wyciag_ing.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/wyciąg_milenium.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/wyciąg_milenium.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +55,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -65,12 +70,29 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="JPA Inspector" value="true" />
+        <entry key="JPA Palette" value="true" />
+        <entry key="JPA Structure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="JPA Inspector" value="true" />
+        <entry key="JPA Palette" value="true" />
+        <entry key="JPA Structure" value="true" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectId" id="21ELTZOHcHdunXjr89K08E0lrsI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -80,18 +102,45 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/java/new/Debter" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/bankstatementsource/millennium" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.13908207" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\MichalSkorek\IdeaProjects\sr-1750-nullreference\bankstatementsource\millennium" />
+      <recent name="C:\Users\MichalSkorek\IdeaProjects\sr-1750-nullreference\bankstatementsource\ing" />
+      <recent name="C:\Users\MichalSkorek\IdeaProjects\sr-1750-nullreference\bankstatementsource\test\temporary\path" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MichalSkorek\IdeaProjects\sr-1750-nullreference\bankstatementsource\millennium" />
+      <recent name="C:\Users\MichalSkorek\IdeaProjects\sr-1750-nullreference\bankstatementsource\test\temporary\path" />
       <recent name="D:\gownoxd\from pulpit\studia\semestr 5\TO\project\sr-1750-nullreference\src\main\resources" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BankstatementApplication">
+    <configuration name="CsvDeserializerTests.testMillenniumCsvDeserializer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="bankstatement" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pl.nullreference.bankstatement.deserializer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pl.nullreference.bankstatement.deserializer" />
+      <option name="MAIN_CLASS_NAME" value="pl.nullreference.bankstatement.deserializer.CsvDeserializerTests" />
+      <option name="METHOD_NAME" value="testMillenniumCsvDeserializer" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DeserializerFactoryTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="bankstatement" />
       <extension name="coverage">
@@ -155,20 +204,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="pl.nullreference.bankstatement.deserializer in bankstatement" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="bankstatement" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="pl.nullreference.bankstatement.deserializer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="pl.nullreference.bankstatement.deserializer" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BankstatementApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="bankstatement" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="pl.nullreference.bankstatement.BankstatementApplication" />
@@ -176,13 +211,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.DeserializerFactoryTests" />
+      <item itemvalue="JUnit.CsvDeserializerTests.testMillenniumCsvDeserializer" />
+      <item itemvalue="JUnit.DeserializerFactoryTests.testDeserializerFactory" />
+      <item itemvalue="JUnit.XlsxDeserializerTests.testIngXlsxDeserializer" />
+      <item itemvalue="JUnit.XlsxDeserializerTests.testMillenniumXlsxDeserializer" />
+      <item itemvalue="Spring Boot.BankstatementApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.pl.nullreference.bankstatement.deserializer in bankstatement" />
-        <item itemvalue="JUnit.DeserializerFactoryTests" />
-        <item itemvalue="JUnit.XlsxDeserializerTests.testIngXlsxDeserializer" />
         <item itemvalue="JUnit.XlsxDeserializerTests.testMillenniumXlsxDeserializer" />
+        <item itemvalue="JUnit.XlsxDeserializerTests.testIngXlsxDeserializer" />
         <item itemvalue="JUnit.DeserializerFactoryTests.testDeserializerFactory" />
+        <item itemvalue="JUnit.CsvDeserializerTests.testMillenniumCsvDeserializer" />
+        <item itemvalue="JUnit.DeserializerFactoryTests" />
       </list>
     </recent_temporary>
   </component>
@@ -216,11 +259,41 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="96dc5b10-db12-45c3-b73d-c4426ce5c865">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
           </value>
         </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="96dc5b10-db12-45c3-b73d-c4426ce5c865" value="TOOL_WINDOW" />
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
@@ -235,7 +308,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java</url>
-          <line>59</line>
+          <line>58</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
