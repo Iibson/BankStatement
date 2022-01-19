@@ -112,6 +112,12 @@ public class BankStatementService {
                 .distinct()
                 .toList();
     }
+    public List<BankStatementSource> getAllBankStatementSources(){
+        return this.sourceService.getAllBanksStatementSources();
+    }
+    public void deleteBankStatementSource(String path){
+        this.sourceService.deleteBankStatementSourcePath(path);
+    }
     public void refreshSources(){
         this.sourceService.refreshSourceObserves();
     }

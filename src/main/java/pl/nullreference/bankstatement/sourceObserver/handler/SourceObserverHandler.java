@@ -1,7 +1,7 @@
 package pl.nullreference.bankstatement.sourceObserver.handler;
 
 import javafx.util.Pair;
-import pl.nullreference.bankstatement.FolderSourceObserver;
+import pl.nullreference.bankstatement.sourceObserver.folder.FolderSourceObserver;
 import pl.nullreference.bankstatement.model.source.BankStatementSource;
 import pl.nullreference.bankstatement.model.source.SourceType;
 import pl.nullreference.bankstatement.sourceObserver.SourceObserver;
@@ -20,6 +20,9 @@ public class SourceObserverHandler {
     }
 
     public void addBankStatementSource(BankStatementSource bankStatementSource) {
+
+        if(observers.get(bankStatementSource.getType()) == null)
+            observers.put(bankStatementSource.getType(), createSourceObserver(bankStatementSource.getType(),new LinkedList<>()));
         observers.get(bankStatementSource.getType())
                 .addBankStatementSource(bankStatementSource);
     }

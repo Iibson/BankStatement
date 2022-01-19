@@ -9,4 +9,5 @@ import java.util.List;
 public interface BankStatementSourceRepository extends CrudRepository<BankStatementSource, Integer> {
 
     List<BankStatementSource> findByType(SourceType type);
+    List<BankStatementSource> findBySourcePath(String sourcePath);
 }

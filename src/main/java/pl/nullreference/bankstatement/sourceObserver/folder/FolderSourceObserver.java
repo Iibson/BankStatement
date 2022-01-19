@@ -1,4 +1,4 @@
-package pl.nullreference.bankstatement;
+package pl.nullreference.bankstatement.sourceObserver.folder;
 
 import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.model.source.BankStatementSource;
@@ -16,8 +16,7 @@ import java.util.Map;
 
 public class FolderSourceObserver extends BaseSourceObserver {
 
-    private final String SEPARATOR;
-    private String DIR;
+
     private final LinkedList<SourceObserverResultDto> filesToUpdate = new LinkedList<>();
     Map<WatchKey, Path> keyMap = new HashMap<>();
     Map<String, Provider> providerMap = new HashMap<>();
@@ -26,11 +25,6 @@ public class FolderSourceObserver extends BaseSourceObserver {
 
     public FolderSourceObserver(List<BankStatementSource> bankStatementSources) {
         super(bankStatementSources);
-        this.SEPARATOR = System.getProperty("file.separator");
-        this.DIR = "bankstatementsource" + SEPARATOR;
-        if (this.SEPARATOR.equals("\\")) {
-            this.DIR += this.SEPARATOR;
-        }
         try {
             watchService = FileSystems.getDefault().newWatchService();
             initObservers();
@@ -90,9 +84,7 @@ public class FolderSourceObserver extends BaseSourceObserver {
         Path dir = keyMap.get(key);
         Path relativePath = (Path) event.context();
         String fileName = dir.resolve(relativePath).toString();
-        File file = new File(fileName);
-        String sourcePath = getSourcePath(fileName, relativePath.toString());
-        Provider provider = providerMap.get(sourcePath);
+        File file = new File(fileName);        Provider provider = providerMap.get(file.getParent());
         return SourceObserverResultDto.builder()
                 .provider(provider)
                 .file(file)
@@ -101,7 +93,7 @@ public class FolderSourceObserver extends BaseSourceObserver {
 
     private void registerObserver(BankStatementSource source) {
         try {
-            Path path = Paths.get(DIR + source.getSourcePath()).toAbsolutePath();
+            Path path = Paths.get(source.getSourcePath()).toAbsolutePath();
 
             WatchKey key = path.register(
                     watchService,
@@ -116,9 +108,4 @@ public class FolderSourceObserver extends BaseSourceObserver {
         }
     }
 
-
-    private String getSourcePath(String fileName, String relativePath) {
-        return fileName.split(DIR)[1].split(
-                (this.SEPARATOR.equals("\\") ? this.SEPARATOR + this.SEPARATOR : this.SEPARATOR) + relativePath)[0];
-    }
 }

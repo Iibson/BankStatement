@@ -195,6 +195,7 @@ public class BankStatementOverviewController {
         BankStatementDataSourcesController controller = loader.getController();
         controller.setProvidersBoxes(this.bankStatementService.getAllProviders());
         controller.setBankStatementService(bankStatementService);
+        controller.loadData();
         controller.setDialogStage(dataSourcesStage);
         dataSourcesStage.show();
     }

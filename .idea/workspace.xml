@@ -22,21 +22,18 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9db3d6f9-bd15-4ee7-9bd3-aa2e6f2b7993" name="Default Changelist" comment="Fix merge bug">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/controller/BankStatementDataSourcesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/DataSourcesDialog.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="9db3d6f9-bd15-4ee7-9bd3-aa2e6f2b7993" name="Default Changelist" comment="created datasource controller and view, with autorefresh, manual refresh and datasource create">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/viewmodel/BankStatementSourceListViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/viewmodel/BankStatementSourceViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bankstatement.iml" beforeDir="false" afterPath="$PROJECT_DIR$/bankstatement.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/FolderSourceObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/FolderSourceObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/FolderSourceObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/sourceObserver/folder/FolderSourceObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/controller/BankStatementDataSourcesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/controller/BankStatementDataSourcesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/controller/BankStatementOverviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/controller/BankStatementOverviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/provider/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/model/provider/Provider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/BankStatementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/BankStatementService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/BankStatementSourceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/BankStatementSourceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/repositories/ProviderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/repositories/ProviderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/sourceObserver/rest/RestSourceObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/sourceObserver/rest/RestSourceObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/BankStatementOverview.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/BankStatementOverview.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/repositories/BankStatementSourceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/services/repositories/BankStatementSourceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/sourceObserver/handler/SourceObserverHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/sourceObserver/handler/SourceObserverHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DataSourcesDialog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DataSourcesDialog.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/wyciag_ing.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/wyciag_ing.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/wyciąg_milenium.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/wyciąg_milenium.xlsx" afterDir="false" />
     </list>
@@ -107,6 +104,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.13908207" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -250,7 +248,17 @@
       <workItem from="1638741530217" duration="755000" />
       <workItem from="1638742514430" duration="1012000" />
       <workItem from="1638743723724" duration="222000" />
+      <workItem from="1642555900027" duration="255000" />
+      <workItem from="1642593634858" duration="10027000" />
     </task>
+    <task id="LOCAL-00001" summary="created datasource controller and view, with autorefresh, manual refresh and datasource create">
+      <created>1642556044103</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1642556044103</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,6 +306,10 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="created datasource controller and view, with autorefresh, manual refresh and datasource create" />
+    <option name="LAST_COMMIT_MESSAGE" value="created datasource controller and view, with autorefresh, manual refresh and datasource create" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -310,6 +322,16 @@
           <url>file://$PROJECT_DIR$/src/test/java/pl/nullreference/bankstatement/deserializer/XlsxDeserializerTests.java</url>
           <line>58</line>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/sourceObserver/handler/SourceObserverHandler.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/pl/nullreference/bankstatement/sourceObserver/folder/FolderSourceObserver.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

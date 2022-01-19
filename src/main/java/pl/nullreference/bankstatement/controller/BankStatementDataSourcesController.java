@@ -1,21 +1,17 @@
 package pl.nullreference.bankstatement.controller;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.model.source.BankStatementSource;
 import pl.nullreference.bankstatement.model.source.SourceType;
 import pl.nullreference.bankstatement.services.BankStatementService;
+import pl.nullreference.bankstatement.viewmodel.BankStatementSourceListViewModel;
+import pl.nullreference.bankstatement.viewmodel.BankStatementSourceViewModel;
 
 import java.io.File;
 import java.util.List;
@@ -42,10 +38,28 @@ public class BankStatementDataSourcesController {
     private Button addEndpointButton;
     @FXML
     private Button addDirectoryButton;
+    @FXML
+    private TableView<BankStatementSourceViewModel> directoryTable;
+    @FXML
+    private TableView<BankStatementSourceViewModel> urlTable;
+    @FXML
+    private TableColumn<BankStatementSourceViewModel, String> directoryTablePathColumn;
+    @FXML
+    private TableColumn<BankStatementSourceViewModel, String> directoryTableBankNameColumn;
+    @FXML
+    private TableColumn<BankStatementSourceViewModel, String> directoryTableExtensionColumn;
+    @FXML
+    private TableColumn<BankStatementSourceViewModel, String> urlTablePathColumn;
+    @FXML
+    private TableColumn<BankStatementSourceViewModel, String> urlTableBankNameColumn;
+    @FXML
+    private TableColumn<BankStatementSourceViewModel, String> urlTableExtensionColumn;
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
+
+    private BankStatementSourceListViewModel sourcesList;
 
     @FXML
     private void initialize() {
@@ -61,13 +75,15 @@ public class BankStatementDataSourcesController {
         );
     }
 
+
+
     @FXML
     private void handleChoose() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Open directory");
         File directory = directoryChooser.showDialog(dialogStage);
         if (directory != null) {
-            this.chosenDirectoryPathField.setText(directory.getName());
+            this.chosenDirectoryPathField.setText(directory.getAbsolutePath());
         }
     }
 
@@ -78,7 +94,9 @@ public class BankStatementDataSourcesController {
                 this.directoryProvidersBox.getValue(),
                 this.directoryExtensionsBox.getValue(),
                 SourceType.DIRECTORY);
-        dialogStage.close();
+        this.showSuccessDialog();
+        this.chosenDirectoryPathField.setText(null);
+
     }
 
     @FXML
@@ -88,7 +106,42 @@ public class BankStatementDataSourcesController {
                 this.urlProvidersBox.getValue(),
                 this.urlExtensionsBox.getValue(),
                 SourceType.ENDPOINT);
-        dialogStage.close();
+        this.showSuccessDialog();
+        this.urlField.setText(null);
+    }
+
+    @FXML
+    private void deleteDirectorySource() {
+        deleteSource(this.directoryTable);
+    }
+
+    @FXML
+    private void deleteUrlSource() {
+        deleteSource(this.urlTable);
+    }
+    public void loadData() {
+        this.initData();
+        this.initializeDataTables();
+    }
+    private void deleteSource(TableView<BankStatementSourceViewModel> table) {
+        BankStatementSourceViewModel selectedSource = table.getSelectionModel()
+                .getSelectedItem();
+        if (selectedSource == null) {
+            showNonSelectionDialog();
+        } else {
+            this.bankStatementService.deleteBankStatementSource(selectedSource.getPath());
+            this.sourcesList.deleteSource(selectedSource);
+        }
+    }
+
+    private void showSuccessDialog() {
+        Alert alert = new Alert(Alert.AlertType.NONE, "Added successfully", ButtonType.OK);
+        alert.showAndWait();
+    }
+
+    private void showNonSelectionDialog() {
+        Alert alert = new Alert(Alert.AlertType.NONE, "Please select source to delete.", ButtonType.OK);
+        alert.show();
     }
 
     private void buildBankStatementSourceAndSave(String path, String providerName, String filesExtension, SourceType type) {
@@ -101,8 +154,16 @@ public class BankStatementDataSourcesController {
                 .type(type)
                 .build();
         this.bankStatementService.addBankStatementSource(newSource);
+        this.sourcesList.addBankStatementItemViewModel(new BankStatementSourceViewModel(newSource));
+
     }
 
+    private void initData() {
+        this.sourcesList = new BankStatementSourceListViewModel();
+        List<BankStatementSource> allSources = this.bankStatementService.getAllBankStatementSources();
+        allSources.forEach(source -> this.sourcesList.addBankStatementItemViewModel(new BankStatementSourceViewModel(source)));
+
+    }
 
     public void setProvidersBoxes(List<String> providers) {
         ObservableList<String> observableProviderList = FXCollections.observableList(providers);
@@ -129,5 +190,16 @@ public class BankStatementDataSourcesController {
 
     public void setBankStatementService(BankStatementService bankStatementService) {
         this.bankStatementService = bankStatementService;
+    }
+
+    private void initializeDataTables() {
+        directoryTable.itemsProperty().bindBidirectional(sourcesList.getDirectoryListProperty());
+        urlTable.itemsProperty().bindBidirectional(sourcesList.getUrlListProperty());
+        urlTablePathColumn.setCellValueFactory(dataValue -> dataValue.getValue().getPathProperty());
+        urlTableBankNameColumn.setCellValueFactory(dataValue -> dataValue.getValue().getBankNameProperty());
+        urlTableExtensionColumn.setCellValueFactory(dataValue -> dataValue.getValue().getExtensionProperty());
+        directoryTablePathColumn.setCellValueFactory(dataValue -> dataValue.getValue().getPathProperty());
+        directoryTableBankNameColumn.setCellValueFactory(dataValue -> dataValue.getValue().getBankNameProperty());
+        directoryTableExtensionColumn.setCellValueFactory(dataValue -> dataValue.getValue().getExtensionProperty());
     }
 }

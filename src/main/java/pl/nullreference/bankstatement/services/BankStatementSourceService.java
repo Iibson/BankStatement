@@ -51,4 +51,8 @@ public class BankStatementSourceService {
         var list = bankStatementSourceRepository.findAll();
         return (List<BankStatementSource>) list;
     }
+    @Transactional
+    public void deleteBankStatementSourcePath(String sourcePath){
+        this.bankStatementSourceRepository.deleteAll(this.bankStatementSourceRepository.findBySourcePath(sourcePath));
+    }
 }

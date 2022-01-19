@@ -5,18 +5,21 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="150.0" prefHeight="303.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.nullreference.bankstatement.controller.BankStatementDataSourcesController">
-    <TabPane prefHeight="250.0" prefWidth="800.0">
+<VBox maxHeight="420.0" prefHeight="420.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.nullreference.bankstatement.controller.BankStatementDataSourcesController">
+    <TabPane prefHeight="419.0" prefWidth="800.0">
         <Tab closable="false" text="Local folders">
-            <BorderPane maxHeight="200.0" prefHeight="200.0" prefWidth="800.0">
+            <BorderPane maxHeight="285.0" prefHeight="285.0" prefWidth="800.0">
                 <top>
-                    <VBox prefHeight="62.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                    <VBox prefHeight="390.0" prefWidth="800.0" BorderPane.alignment="CENTER">
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Local folder to listen" wrappingWidth="225.38241577148438">
                             <VBox.margin>
                                 <Insets left="10.0" right="10.0" top="10.0" />
@@ -49,6 +52,28 @@
                                 </HBox.margin>
                             </Button>
                         </HBox>
+                  <HBox layoutX="10.0" layoutY="36.0" maxHeight="26.0" prefHeight="30.0" prefWidth="782.0">
+                     <children>
+                        <Button fx:id="deleteUrlSourceButton" mnemonicParsing="false" onAction="#deleteDirectorySource" prefHeight="26.0" prefWidth="97.0" text="Delete">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <TableView fx:id="directoryTable" prefHeight="334.0" prefWidth="800.0">
+                    <columns>
+                      <TableColumn fx:id="directoryTablePathColumn" prefWidth="414.4000244140625" text="Path" />
+                      <TableColumn fx:id="directoryTableBankNameColumn" minWidth="0.0" prefWidth="208.79998779296875" text="Bank name" />
+                        <TableColumn fx:id="directoryTableExtensionColumn" minWidth="0.0" prefWidth="176.79998779296875" text="Extension" />
+                    </columns>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TableView>
                     </VBox>
                 </top>
             </BorderPane>
@@ -62,6 +87,14 @@
                                 <Insets left="10.0" right="10.0" top="10.0" />
                             </VBox.margin>
                         </Text>
+                  <Text fill="#c70000" layoutX="20.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="URL must start with http:// or https://" wrappingWidth="366.1824035644531">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Text>
                         <HBox maxHeight="26.0" prefHeight="30.0" prefWidth="782.0">
                             <TextField fx:id="urlField" maxWidth="658.0" minWidth="300.0" prefHeight="26.0" prefWidth="378.0">
                                 <HBox.margin>
@@ -80,6 +113,28 @@
                                 </HBox.margin>
                             </Button>
                         </HBox>
+                  <HBox maxHeight="26.0" prefHeight="30.0" prefWidth="782.0">
+                     <children>
+                        <Button fx:id="deleteUrlSourceButton" mnemonicParsing="false" onAction="#deleteUrlSource" prefHeight="26.0" prefWidth="97.0" text="Delete">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <TableView fx:id="urlTable" prefHeight="334.0" prefWidth="800.0">
+                     <columns>
+                        <TableColumn fx:id="urlTablePathColumn" prefWidth="414.4000244140625" text="Path" />
+                        <TableColumn fx:id="urlTableBankNameColumn" minWidth="0.0" prefWidth="208.79998779296875" text="Bank name" />
+                        <TableColumn fx:id="urlTableExtensionColumn" minWidth="0.0" prefWidth="176.79998779296875" text="Extension" />
+                     </columns>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TableView>
                     </VBox>
             </center>
             </BorderPane>
