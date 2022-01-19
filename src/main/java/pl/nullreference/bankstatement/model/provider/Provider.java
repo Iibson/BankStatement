@@ -3,6 +3,7 @@ package pl.nullreference.bankstatement.model.provider;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,13 +30,13 @@ public class Provider {
     public Provider() {
 
     }
-
+    @Transactional
     public Map<String, String> getSettingsAsMap() {
         return this.settings
                 .stream()
                 .collect(Collectors.toMap(ProviderSetting::getName, ProviderSetting::getValue));
     }
-
+    @Transactional
     public Map<String, Integer> getMappingValuesAsMap() {
         return this.mappingValues
                 .stream()

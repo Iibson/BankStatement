@@ -1,6 +1,10 @@
 package pl.nullreference.bankstatement.services;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.nullreference.bankstatement.model.source.BankStatementSource;
@@ -29,7 +33,6 @@ public class BankStatementSourceService {
     public Observable<SourceObserverResultDto> getFilesAsObservable() {
         return handler.getFilesAsObservable();
     }
-
     public void refreshSourceObserves() {
         handler.refreshSourceObserves();
     }
@@ -43,8 +46,13 @@ public class BankStatementSourceService {
         var source = bankStatementSourceRepository.save(bankStatementSource);
         handler.addBankStatementSource(source);
     }
-
+    @Transactional
     public List<BankStatementSource> getAllBanksStatementSources() {
-        return (List<BankStatementSource>) bankStatementSourceRepository.findAll();
+        var list = bankStatementSourceRepository.findAll();
+        return (List<BankStatementSource>) list;
+    }
+    @Transactional
+    public void deleteBankStatementSourcePath(String sourcePath){
+        this.bankStatementSourceRepository.deleteAll(this.bankStatementSourceRepository.findBySourcePath(sourcePath));
     }
 }
