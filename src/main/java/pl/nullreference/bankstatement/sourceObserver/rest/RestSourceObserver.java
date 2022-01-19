@@ -72,17 +72,17 @@ public class RestSourceObserver extends BaseSourceObserver {
     }
 
     public void refresh() {
-//        services.forEach(endpoint -> {
-//            var x = getEndpointResult(endpoint.getValue());
-//            if (x != null) {
-//                subject.onNext(
-//                        SourceObserverResultDto.builder()
-//                                .provider(endpoint.getKey())
-//                                .file(x)
-//                                .build());
-//            }
-//
-//        });
+        services.forEach(endpoint -> {
+            var x = getEndpointResult(endpoint.getValue());
+            if (x != null) {
+                subject.onNext(
+                        SourceObserverResultDto.builder()
+                                .provider(endpoint.getKey())
+                                .file(x)
+                                .build());
+            }
+
+        });
 
     }
 
