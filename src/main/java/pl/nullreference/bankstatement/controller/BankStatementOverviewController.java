@@ -21,11 +21,18 @@ import pl.nullreference.bankstatement.model.bankstatement.Category;
 import pl.nullreference.bankstatement.services.BankStatementService;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemListViewModel;
 import pl.nullreference.bankstatement.viewmodel.BankStatementItemViewModel;
+import rx.Completable;
+import rx.Observable;
+import rx.Scheduler;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class BankStatementOverviewController {
@@ -61,8 +68,7 @@ public class BankStatementOverviewController {
     @FXML
     private TableColumn<BankStatementItemViewModel, ComboBox<Category>> categoryColumn;
 
-    private Timer timer;
-    private boolean isTimerExecuting;
+    private boolean isAutoRefreshWorking;
 
     public BankStatementOverviewController(BankStatementService bankStatementService) {
         this.bankStatementService = bankStatementService;
@@ -73,7 +79,7 @@ public class BankStatementOverviewController {
     private void initialize() {
         this.initData();
         this.initializeDataTable();
-        this.setAutoRefresh();
+        this.configureAutoRefresh();
 
     }
 
@@ -179,12 +185,15 @@ public class BankStatementOverviewController {
 
     @FXML
     private void refreshDataSources() {
-        new Thread(() -> {
-            if (!isTimerExecuting) {
-                System.out.println("Manually refreshing");
-                this.bankStatementService.refreshSources();
-            }
-        }).start();
+        Completable.fromAction(() -> {
+                    if (!isAutoRefreshWorking) {
+                        System.out.println("Manually refreshing start");
+                        bankStatementService.refreshSources();
+                        System.out.println("Manually refreshing end");
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 
     @FXML
@@ -242,19 +251,16 @@ public class BankStatementOverviewController {
         bankStatement.getItems().forEach(item -> this.statementItemList.addBankStatementItemViewModel(new BankStatementItemViewModel(item)));
     }
 
-    private void setAutoRefresh() {
-        this.timer = new Timer();
-        this.timer.schedule(new TimerTask() {
-            @SneakyThrows
-            @Override
-            public void run() {
-                isTimerExecuting = true;
-                System.out.println("Refreshing data sources started...");
-                Thread.sleep(10000);
-                bankStatementService.refreshSources();
-                System.out.println("Refreshing data sources ended...");
-                isTimerExecuting = false;
-            }
-        }, 1000, 30000);
+    private void configureAutoRefresh() {
+        Observable.interval(0, 30, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .subscribe(x -> {
+                    isAutoRefreshWorking = true;
+                    System.out.println("Auto refreshing start");
+                    bankStatementService.refreshSources();
+                    System.out.println("Auto refreshing end");
+                    isAutoRefreshWorking = false;
+
+                });
     }
 }
