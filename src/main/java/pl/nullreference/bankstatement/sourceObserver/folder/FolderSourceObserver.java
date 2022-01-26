@@ -4,7 +4,9 @@ import pl.nullreference.bankstatement.model.provider.Provider;
 import pl.nullreference.bankstatement.model.source.BankStatementSource;
 import pl.nullreference.bankstatement.sourceObserver.base.BaseSourceObserver;
 import pl.nullreference.bankstatement.sourceObserver.dto.SourceObserverResultDto;
+import rx.Completable;
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,15 +42,10 @@ public class FolderSourceObserver extends BaseSourceObserver {
         }
     }
 
-    public Observable<SourceObserverResultDto> getSourceObservable() {
-        return subject.asObservable()
-                .filter(dto -> dto.getFile() != null && dto.getFile().exists());
-    }
-
     @Override
     public void refresh() {
         filesToUpdate.forEach(file -> {
-            subject.onNext(file);
+            notifySourceObserverSubject(file);
         });
         filesToUpdate.clear();
     }
@@ -60,7 +57,7 @@ public class FolderSourceObserver extends BaseSourceObserver {
     }
 
     private void startObserveFolders() {
-        new Thread(() -> {
+        Completable.fromAction(() -> {
             try {
                 WatchKey key;
                 while ((key = watchService.take()) != null) {
@@ -77,7 +74,7 @@ public class FolderSourceObserver extends BaseSourceObserver {
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
             }
-        }).start();
+        }).subscribeOn(Schedulers.io()).subscribe();
     }
 
     private SourceObserverResultDto createSourceObserverResultDto(WatchKey key, WatchEvent event) {

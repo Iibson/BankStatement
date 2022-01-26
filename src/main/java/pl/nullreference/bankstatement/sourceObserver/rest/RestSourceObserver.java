@@ -28,12 +28,6 @@ public class RestSourceObserver extends BaseSourceObserver {
     }
 
     @Override
-    public Observable<SourceObserverResultDto> getSourceObservable() {
-        return subject.asObservable()
-                .filter(dto -> dto.getFile() != null && dto.getFile().exists());
-    }
-
-    @Override
     public void resetList(List<BankStatementSource> bankStatementSources) {
         this.bankStatementSources.clear();
         this.bankStatementSources.addAll(bankStatementSources);
@@ -75,11 +69,10 @@ public class RestSourceObserver extends BaseSourceObserver {
         services.forEach(endpoint -> {
             var x = getEndpointResult(endpoint.getValue());
             if (x != null) {
-                subject.onNext(
-                        SourceObserverResultDto.builder()
-                                .provider(endpoint.getKey())
-                                .file(x)
-                                .build());
+                notifySourceObserverSubject(SourceObserverResultDto.builder()
+                        .provider(endpoint.getKey())
+                        .file(x)
+                        .build());
             }
 
         });
